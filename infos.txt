@@ -1,0 +1,3 @@
+Info de code : 
+
+Les classes suivent un nommage similaire. Chaque class porte le nom de la page en préfix

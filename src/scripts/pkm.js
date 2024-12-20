@@ -1,8 +1,12 @@
 console.log("Script bien chargé");
 
+// ---------- URL SETTINGS ---------
 const PROTOCOLE_API = `https`;
 const URL_API = `pokeapi.co/api/v2`;
 
+const BASE_AUDIO_URL = 'https://pokemoncries.com/cries';
+
+// ---------- GLOBAL CONST ---------
 const PROBA_SHINY = 0.05; //En %
 
 // --------------------------------------------------------------------------------------------------------------
@@ -22,12 +26,12 @@ async function getRandomPokemonSprite() {
     //Fetch
     try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error(`:( Error! Status: ${response.status}`);
+        if (!response.ok) throw new Error(` Error :( || Status: ${response.status}`);
 
         const data = await response.json();
 
         //----------- More data -----------
-        const speciesUrl = data.species.url;
+        // const speciesUrl = data.species.url;
         // const speciesResponse = await fetch(speciesUrl);
         // const speciesData = await speciesResponse.json();
 
@@ -46,7 +50,12 @@ async function getRandomPokemonSprite() {
         const spriteImage = `<img src="${pkmSprite}" alt="Sprite du pokémon ${pkmAngName}" title="${pkmAngName}" />`;
         const shinyLabel = isShiny ? `<p>✨ WAOUW ! Shiny ${pkmAngName}! ✨</p>` : `<p>${pkmAngName}</p>`;
 
-        document.getElementById("pokemon-sprite").innerHTML = shinyLabel + spriteImage;
+        document.getElementById("sprite-pkm").innerHTML = shinyLabel + spriteImage;
+
+        // -------- Load and Play Sound --------
+        const audioElement = document.getElementById("audio-pkm");
+        audioElement.src = `${BASE_AUDIO_URL}/${randomId}.mp3`;
+        audioElement.play();
 
         console.log("Pokémon recu : " + pkmAngName);
     } catch (error) {
@@ -58,9 +67,8 @@ async function getRandomPokemonSprite() {
 // --------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------- EVENTS LISTENERS ----------------------------------------------
 
-document.getElementById("generate-pokemon").addEventListener("click", getRandomPokemonSprite);
+document.getElementById("generate-pkm").addEventListener("click", getRandomPokemonSprite);
 
 
 // --------------------------------------------------------------------------------------------------------------
 // ------------------------------------------------- UI CHANGES -------------------------------------------------
-
