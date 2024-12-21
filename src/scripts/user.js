@@ -76,6 +76,7 @@ document.getElementById("user-login-form").addEventListener("submit", (event) =>
 document.getElementById("user-logout-btn").addEventListener("click", () => {
     localStorage.removeItem(CURRENT_PLAYER_KEY);
     document.getElementById("user-logout-btn").style.display = "none";
+    loadPlayers();
     showMessage("Déconnecté avec succès !");
 });
 

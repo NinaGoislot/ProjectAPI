@@ -26,8 +26,9 @@ body {
     margin: auto;
 }
 
-.game-game-area .game-display .game-display-item {
+.game-game-area .game-display .game-display-item, .game-game-area .game-pkm-guess .game-pkm-name-try{
     display: none;
+    animation: all ease-in-out 1s;
 }
 
 .game-game-area .game-display .game-display-item.active {
@@ -43,10 +44,6 @@ body {
     flex-direction: column;
 }
 
-.game-game-area .game-pkm-guess .game-pkm-name-try {
+.game-game-area .game-pkm-guess .game-pkm-name-try.active {
     display: flex;
-}
-
-.game-game-area .game-pkm-guess #pkm-name-answer {
-    opacity: 0;
 }

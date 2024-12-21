@@ -28,7 +28,7 @@
             <p id="game-current-type">Type de jeu actuel : Guess Sound</p>
         </div>
         <section class="game-game-area">
-            <button id="generate-pkm" class="game-generate-pkm">Générer un pokémon</button>
+            <button id="generate-pkm" class="game-generate-pkm">Générer un nouveau pokémon</button>
 
             <div class="game-display">
                 <img id="game-sprite-pkm" class="game-display-item" src="./src/images/image-default.jpg"
@@ -39,11 +39,12 @@
             </div>
 
             <div class="game-pkm-guess">
-                <div class="game-pkm-name-try">
+                <div id="game-pkm-name-try" class="game-pkm-name-try">
                     <input placeholder="Nom du pokémon" type="text" id="pkm-name-user" name="pkm-name-user" required minlength="3"
                         maxlength="20" />
                     <button id="check-pkm-name" class="game-generate-pkm">Check</button>
                 </div>
+                <p id="pkm-name-answer"></p>
                 <!-- <input type="text" id="pkm-name-answer" name="pkm-name-answer" minlength="3" maxlength="20" readonly /> -->
             </div>
         </section>
