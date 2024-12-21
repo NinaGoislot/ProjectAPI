@@ -1,3 +1,12 @@
-{
-    
-}
+[
+    {
+        "id": "1",
+        "name": "Ash",
+        "pokemons": ["Pikachu", "Charizard"]
+    },
+    {
+        "id": "2",
+        "name": "Misty",
+        "pokemons": ["Psyduck", "Starmie"]
+    }
+]

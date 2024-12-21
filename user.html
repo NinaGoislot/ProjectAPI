@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="./src/scripts/user.js"></script>
+</head>
+
+<body>
+    <a href="./index.html">Accueil</a>
+    <a href="./game.html">Jouer</a>
+
+    <div>
+        <!-- inscription -->
+        <h2>Ajouter un joueur</h2>
+        <form id="user-register-form">
+            <label for="user-register-name">Nom du joueur :</label>
+            <input type="text" id="user-register-name" name="user-register-name" placeholder="Nom du joueur" required
+                minlength="3" maxlength="20" />
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <!-- connexion -->
+        <h2>Connexion</h2>
+        <form id="user-login-form">
+            <label for="user-login-name">Nom du joueur :</label>
+            <input type="text" id="user-login-name" name="user-login-name" placeholder="Nom du joueur" required minlength="3"
+                maxlength="20" />
+            <button type="submit">Se connecter</button>
+        </form>
+
+        <!-- déconnexion -->
+        <button id="user-logout-btn" style="display: none;">Se déconnecter</button>
+
+        <p id="user-status-message"></p>
+    </div>
+
+</body>
+
+</html>
