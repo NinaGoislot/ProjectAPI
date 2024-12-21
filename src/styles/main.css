@@ -1,3 +1,48 @@
 img {
     width: 400px;
 }
+
+
+/***************************** Global classes ******************************/
+body {
+    margin: 0;
+
+    max-height: 100vh;
+    max-width: 100vw;
+
+    padding: 1rem;
+}
+
+/****************************** Game classes *******************************/
+
+#game-sprite-pkm {
+    width: 100%;
+}
+
+.game-game-area {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.game-game-area .game-display .game-display-item {
+  display: none;
+}
+
+.game-game-area .game-display .game-display-item.active {
+    display:block;
+  }
+
+.game-game-area .game-pkm-guess {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-game-area .game-pkm-guess .game-pkm-name-try {
+    display: flex;
+}
+
+.game-game-area .game-pkm-guess #pkm-name-answer {
+    opacity: 0;
+}
