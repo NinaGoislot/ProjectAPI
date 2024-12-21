@@ -27,12 +27,16 @@ body {
 }
 
 .game-game-area .game-display .game-display-item {
-  display: none;
+    display: none;
 }
 
 .game-game-area .game-display .game-display-item.active {
-    display:block;
-  }
+    display: block;
+}
+
+.game-game-area .game-display #game-sprite-pkm.shape {
+    filter: brightness(0) contrast(1);
+}
 
 .game-game-area .game-pkm-guess {
     display: flex;
