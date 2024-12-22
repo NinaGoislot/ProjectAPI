@@ -20,7 +20,7 @@
 }
 
 body {
-    font-family: "PokemonPixels", sans-serif;
+    font-family:  sans-serif;
     margin-top: 1rem;
     min-height: 100vh;
     max-width: 100vw;
@@ -52,6 +52,7 @@ main {
 
 /* Header et footer fixes */
 header, footer {
+    font-family: "PokemonPixels", sans-serif;
     background-color: var(--primary-color);
     color: var(--light-color);
     text-align: center;
