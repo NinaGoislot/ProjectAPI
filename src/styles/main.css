@@ -261,80 +261,44 @@ footer p {
 /*************************** Favorites classes *****************************/
 /***************************************************************************/
 
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
 .favorites-pkm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Utilisation de 100vh pour couvrir toute la hauteur de la page */
-    width: 100%; /* S'assurer que la largeur est également de 100% */
-    background-image: url('src/images/garden.png'); /* Utiliser des slashs pour les chemins */
-    background-size: cover; /* Assurer que l'image couvre toute la zone */
-    background-position: center; /* Centrer l'image */
-    background-repeat: no-repeat; /* Empêcher la répétition */
-}
-
-.favorites-pkm-list {
-    width: 50%;
-    height: 50vh;
     position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px dashed var(--color-light-border);
-    background-color: rgba(255, 255, 255, 0.5); /* Optionnel : ajouter un fond transparent pour mettre en valeur la liste */
+    background-image: url('src/images/garden.png'); /* Image de fond */
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Hauteur de la page */
+    overflow: hidden; /* Empêche le débordement des Pokémon */
 }
 
-.favorites-pkm-card img {
-    width: 200px;
-    height: auto;
+.favorites-pkm-card {
     position: absolute;
-    animation: jump-move 4s infinite;
+    width: 100px; /* Taille de chaque Pokémon */
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: moveRandomly 5s infinite ease-in-out, jump 1s infinite ease-in-out;
 }
 
 /* Animation de saut */
 @keyframes jump {
-    0%, 50%, 100% {
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateY(-20px);
-    }
-}
-
-/* Déplacement aléatoire */
-@keyframes move-random {
     0%, 100% {
-        transform: translate(0, 0);
-    }
-    25% {
-        transform: translate(calc(-10% + 20px), calc(-10% + 20px));
+        transform: translateY(0);
     }
     50% {
-        transform: translate(calc(10% - 20px), calc(10% - 20px));
-    }
-    75% {
-        transform: translate(calc(-5% + 10px), calc(-5% + 10px));
+        transform: translateY(-20px);
     }
 }
 
-/* Animation combinée : saut + déplacement */
-@keyframes jump-move {
-    0%, 50%, 100% {
-        transform: translateY(0);
+/* Animation de mouvement aléatoire */
+@keyframes moveRandomly {
+    0% {
+        top: calc(100vh - 150px);
+        left: 0;
     }
-    25% {
-        transform: translateY(-20px);
-    }
-    75% {
-        animation: move-random 3s;
+    100% {
+        top: calc(100vh - 150px);
+        left: calc(100vw - 100px);
     }
 }
 
