@@ -20,11 +20,15 @@ const GameType = {
 
 //Déclarations
 let pkmSprite;
+let pkmAllSprites;
 let pkmAngName;
 let pkmFrName;
 let pkmID;
-let displayHelp = false;
+let pkmTypes;
 
+let randomValue;
+let helped = false;
+let newShinyValue = 0;
 
 let currentGameType = GameType.GUESS_SOUND;
 
@@ -35,8 +39,10 @@ let currentGameType = GameType.GUESS_SOUND;
 
 async function getRandomPokemonData() {
     pkmID = Math.floor(Math.random() * NB_POKEMON) + 1;
+    helped = false;
     const url = `${PROTOCOLE_API}://${URL_API}/pokemon/${pkmID}`;
-    const isShiny = checkIfShiny();
+
+    randomValue = Math.random() * 100;
 
     //Fetch
     try {
@@ -64,7 +70,9 @@ async function getRandomPokemonData() {
         pkmFrName = speciesData.names.find(nameEntry => nameEntry.language.name === "fr").name;
 
         // ---------- Get Sprite ----------
-        pkmSprite = isShiny ? data.sprites.front_shiny : data.sprites.front_default;
+        // pkmSprite = isShiny ? data.sprites.front_shiny : data.sprites.front_default;
+        pkmAllSprites = data.sprites;
+        pkmSprite = pkmAllSprites.front_default;
 
         // -------- Load sprite --------
         const imgSprite = document.getElementById("game-sprite-pkm");
@@ -73,6 +81,17 @@ async function getRandomPokemonData() {
         // -------- Set Input Value --------
         // const inputElement = document.getElementById("pkm-name-answer");
         // inputElement.value = pkmAngName;
+
+        // ---------------------------------------
+        // ------------- HELP BUTTONS ------------
+        // ---------------------------------------
+        const helpContainer = document.getElementById('help-container'); // Assurez-vous que cet élément existe
+        helpContainer.innerHTML = '';
+        const helpElements = document.querySelectorAll(".game-controls-help");
+        helpElements.forEach(helpElement => {
+            helpElement.classList.add("active");
+        });
+
 
         // ---------- Other items ----------
         const inputUserElement = document.getElementById("game-pkm-name-try");
@@ -85,7 +104,15 @@ async function getRandomPokemonData() {
         const spriteElement = document.getElementById("game-sprite-pkm");
 
         // ------------------------------------
+        // ------------ GET TYPES -------------
+        // ------------------------------------
+
+        pkmTypes = data.types.map(typeEntry => typeEntry.type.name);
+        console.log("Types du Pokémon : " + pkmTypes.join(", "));
+
+        // ------------------------------------
         // ----------- GAME DISPLAY -----------
+        // ------------------------------------
         switch (currentGameType) {
             case 1: //Guess sound
                 // -------- Load Sound --------
@@ -119,12 +146,20 @@ async function getRandomPokemonData() {
 
 function checkPkmName() {
     const isShiny = checkIfShiny();
-    let catchLabel = isShiny ? `✨ WAOUW ! Vous obtenez un ${pkmFrName} Shiny ! ✨` : `Félications ! Vous obtenez un ${pkmFrName}.`;
     const userGuess = document.getElementById("pkm-name-user").value.trim().toLowerCase();
     // const correctAnswer = document.getElementById("pkm-name-answer").value.trim().toLowerCase();
 
     if (userGuess === pkmAngName.toLowerCase() || userGuess === pkmFrName.toLowerCase()) {
-         const currentPlayerData = localStorage.getItem(CURRENT_PLAYER_KEY);
+        const currentPlayerData = localStorage.getItem(CURRENT_PLAYER_KEY);
+        let catchLabel = `Félications ! Vous obtenez un ${pkmFrName}.`;
+
+        if (isShiny) {
+            pkmSprite = pkmAllSprites.front_shiny;
+            catchLabel = `✨ WAOUW ! Vous obtenez un ${pkmFrName} Shiny ! ✨`;
+            const imgSprite = document.getElementById("game-sprite-pkm");
+            imgSprite.src = `${pkmSprite}`;
+        }
+
 
         if (currentPlayerData) {
             const currentPlayer = JSON.parse(currentPlayerData);
@@ -172,7 +207,7 @@ function checkPkmName() {
 
 function toggleGameType(event) {
     const inputUserElement = document.getElementById("pkm-name-user");
-    inputUserElement.value ='';
+    inputUserElement.value = '';
 
     console.log("currentGameType : " + currentGameType);
     currentGameType = parseInt(event.target.value);
@@ -259,7 +294,7 @@ async function getSquareHelp() {
             // add btn to container
             helpContainer.classList.add("active");
             helpContainer.appendChild(btn);
-        });
+        })
 
         // Désactiver boutons d'aide et l'input user
         const helpElements = document.querySelectorAll(".game-controls-help");
@@ -268,7 +303,7 @@ async function getSquareHelp() {
         });
 
         const guessGroupElement = document.getElementById("game-pkm-name-try");
-        guessGroupElement.classList.remove("active");
+        guessGroupElement.classList.remove("active")
 
         // Change shiny value drop
         helped = true;
@@ -276,12 +311,12 @@ async function getSquareHelp() {
             case 1: //Guess sound
                 newShinyValue = PROBA_SHINY_SOUND / 4;
                 break;
-            case 2: //Guess shape
+            case 2: //Guess shadpe
                 newShinyValue = PROBA_SHINY_SHADOW / 4;
                 break;
             default:
                 break;
-        }
+        };
     } catch (error) {
         console.error("Erreur dans getSquareHelp :", error);
     }
@@ -356,11 +391,16 @@ document.getElementById("game-switch").addEventListener("change", toggleGameType
 
 
 function checkIfShiny() {
+    let valueToUse;
     switch (currentGameType) {
         case 1:
-            return Math.random()*100 < PROBA_SHINY_SOUND;
+            valueToUse = helped ? newShinyValue : PROBA_SHINY_SOUND;
+            console.log("taux de drop de shiny : " + valueToUse);
+            return randomValue < valueToUse;
         case 2:
-            return Math.random()*100 < PROBA_SHINY_SHADOW;
+            valueToUse = helped ? newShinyValue : PROBA_SHINY_SHADOW;
+            console.log("taux de drop de shiny : " + valueToUse);
+            return randomValue < valueToUse;
         default:
             return false;
     };
@@ -372,12 +412,15 @@ function endGame(catchLabel) {
     const guessGroupElement = document.getElementById("game-pkm-name-try");
     const inputUserElement = document.getElementById("pkm-name-user");
     const textAfterCatch = document.getElementById("pkm-name-answer");
+    const helpContainer = document.getElementById('help-container');
 
     spriteElement.classList.remove("shape");
     spriteElement.classList.add("active");
     audioElement.classList.add("active");
     guessGroupElement.classList.remove("active")
+    helpContainer.classList.remove("active");
 
-    inputUserElement.value ='';
+
+    inputUserElement.value = '';
     textAfterCatch.innerText = catchLabel;
 }
