@@ -110,24 +110,24 @@ footer p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../styles/images/backmaybe.gif'); /* Chemin relatif vers l'image */
-    background-size: cover; /* L'image couvre toute la fenêtre */
-    background-repeat: no-repeat; /* Pas de répétition de l'image */
-    background-position: center; /* L'image est centrée */
+    background-image: url('../styles/images/backmaybe.gif'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
     z-index: -1; 
     filter: brightness(70%); 
 }
 
-/* Bouton "Jouer" pixel art avec border-image */
+
 .play-button {
     position: absolute;
-    top: 45%; /* Ajuste la position légèrement au-dessus du centre */
+    top: 45%; 
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
     padding: 20px 40px;
     text-align: center;
-    font-family: 'Minecraft', sans-serif; /* Utilise la police Minecraft */
+    font-family: 'Pokemon', sans-serif;
     font-size: 1.5rem;
     color: white;
     text-decoration: none;
@@ -135,13 +135,13 @@ footer p {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     z-index: 10;
-    border: 5px solid transparent; /* Bordure transparente pour que l'image de bordure soit visible */
-    border-image: url('./images/pixel-border.png') 30 round; /* Utilise l'image pour la bordure */
+    border: 5px solid transparent;
+    border-image: url('./images/rect.png') 30 round; 
 }
 
 .play-button:hover {
-    background-color: white; /* Fond blanc au survol */
-    color: #b20000; /* Texte rouge */
+    background-color: white; 
+    color: #b20000; 
 }
 
 
