@@ -92,7 +92,7 @@ header nav a:hover {
 
 /* Style pour le titre et les icônes */
 .poke-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
     text-align: left;
     margin-left: 2vw;
 }
@@ -115,8 +115,8 @@ header nav a:hover {
 
 /* Style pour les icônes */
 .header-button {
-    width: 4vw;
-    height: 4vw;
+    width: 2em;
+    height: 2em;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
@@ -178,26 +178,6 @@ footer p {
     align-items: center;
     min-height: 100vh;
 }
-
-.play-button {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: inline-block;
-    padding: 3vw 6vw;
-    text-align: center;
-    font-size: 2rem;
-    color: var(--light-color);
-    text-decoration: none;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    z-index: 10;
-    border: 5px solid transparent;
-    border-image: url('.\src\images\rect.png') 30 round;
-}
-
 .connect-message {
     position: absolute;
     top: calc(45% + 100px);
@@ -212,7 +192,26 @@ footer p {
     width: 90%;
     max-width: 320px;
 }
+.play-button {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 3vw 6vw;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--light-color);
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid var(--light-color); /* Bordure blanche */
+    border-radius: 10px; /* Coin arrondi */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+}
 
+/* Effet de survol pour le bouton */
 .play-button:hover {
     background-color: var(--light-color);
     color: var(--primary-color);
@@ -220,11 +219,20 @@ footer p {
 
 /* Responsive styles */
 @media screen and (max-width: 600px) {
-    .poke-title {
-        font-size: 1.2rem;
-        /* Réduction pour les écrans plus petits */
-        margin-left: 3vw;
+    .play-button {
+        font-size: 1.5rem;
+        padding: 5vw 7vw;
     }
+}
+
+@media screen and (max-width: 400px) {
+    .play-button {
+        font-size: 1rem;
+        padding: 4vw 6vw;
+    }
+}
+
+
 
     .header {
         padding: 1rem 3%;
@@ -250,7 +258,6 @@ footer p {
         width: 85%;
         max-width: 270px;
     }
-}
 
 @media screen and (max-width: 400px) {
     .poke-title {
@@ -736,4 +743,3 @@ footer p {
         padding: 6px 12px;
     }
 }
-
