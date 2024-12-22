@@ -7,19 +7,20 @@
 
     --secondary-color: #008000;
     --secondary-color-contrast: #f0fff0;
-    
+
     --neutral-color: #f8f9fa;
     --neutral-color-accentuated: #ccc;
-    
+
 }
 
 @font-face {
     font-family: "PokemonPixels";
-    src: url('../fonts/minecraft.ttf') format('truetype'); /* Assuming fonts is one level up */
+    src: url('../fonts/minecraft.ttf') format('truetype');
+    /* Assuming fonts is one level up */
 }
 
 body {
-    font-family:  sans-serif;
+    font-family: "PokemonPixels", sans-serif;
     margin-top: 1rem;
     min-height: 100vh;
     max-width: 100vw;
@@ -35,8 +36,10 @@ main {
 
     padding: 1rem;
     box-sizing: border-box;
-    padding-top: 80px; /* For header */
-    padding-bottom: 80px; /* For footer */
+    padding-top: 80px;
+    /* For header */
+    padding-bottom: 80px;
+    /* For footer */
     overflow-y: auto;
 }
 
@@ -49,7 +52,6 @@ main {
 
 /* Header et footer fixes */
 header, footer {
-    font-family: "PokemonPixels", sans-serif;
     background-color: var(--primary-color);
     color: var(--light-color);
     text-align: center;
@@ -134,9 +136,27 @@ footer p {
     font-size: 1rem;
 }
 
+/***************************************************************************/
+/***************************** General classes *****************************/
+/***************************************************************************/
+
+.btn {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--primary-color-hovered);
+}
+
 
 /***************************************************************************/
-/***************************** index classes ******************************/
+/****************************** index classes ******************************/
 /***************************************************************************/
 
 .index-background-container {
@@ -200,12 +220,14 @@ footer p {
 /* Responsive styles */
 @media screen and (max-width: 600px) {
     .poke-title {
-        font-size: 1.2rem;  /* Réduction pour les écrans plus petits */
+        font-size: 1.2rem;
+        /* Réduction pour les écrans plus petits */
         margin-left: 3vw;
     }
 
     .header {
-        padding: 1rem 3%; /* Moins d'espace sur les petits écrans */
+        padding: 1rem 3%;
+        /* Moins d'espace sur les petits écrans */
     }
 
     header nav {
@@ -213,7 +235,8 @@ footer p {
     }
 
     header nav a {
-        font-size: 1rem; /* Adaptation de la taille des liens */
+        font-size: 1rem;
+        /* Adaptation de la taille des liens */
     }
 
     .play-button {
@@ -246,6 +269,56 @@ footer p {
 /***************************************************************************/
 /****************************** Game classes *******************************/
 /***************************************************************************/
+
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+  }
+  
+  .game-info {
+    width: 30%;
+  }
+  
+  .game-content {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .game-display {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .game-pkm-guess {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #pkm-name-user {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    max-width: 300px;
+  }
+  
+  .game-controls {
+    text-align: center;
+  }
+  
+  .game-controls-help {
+    margin: 10px;
+  }
+  
+
+/***************************************************************************/
+/*************************** Favorites classes *****************************/
+/***************************************************************************/
+
 .favorites-pkm {
     position: fixed;
     top: 0;
@@ -291,93 +364,79 @@ footer p {
 
 .favorites-pkm-card {
     position: absolute;
+    bottom: 100px; /* Tous les Pokémon seront à 100px au-dessus du footer */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transform-origin: center;
+    width: 150px; /* Taille des Pokémon */
+    height: 150px; /* Taille des Pokémon */
+    animation: jump 1s infinite ease-in-out, move 3s infinite linear; /* Ralentir la vitesse de déplacement */
 }
 
-/* Animations pour chaque carte */
-
-@keyframes bounceMove1 {
+/* Animation de saut */
+@keyframes jump {
     0%, 100% {
         transform: translateY(0);
     }
-    25% {
-        transform: translateY(-30px);
-    }
     50% {
-        transform: translateY(0);
-    }
-    75% {
-        transform: translateY(10px);
-    }
-    100% {
-        transform: translateY(0);
+        transform: translateY(-10px); /* Moins de hauteur pour le saut */
     }
 }
 
-@keyframes bounceMove2 {
-    0%, 100% {
-        transform: translateY(0) scaleX(1);
+/* Animation de déplacement (gauche-droite lent et court) */
+@keyframes move {
+    0% {
+        transform: translateX(0);
     }
-    25% {
-        transform: translateY(-25px) scaleX(1); /* Miroir sur l'axe X */
+    33% {
+        transform: translateX(-20px); /* Déplacement à gauche réduit */
     }
-    50% {
-        transform: translateY(0) scaleX(1);
+    66% {
+        transform: translateX(20px); /* Déplacement à droite réduit */
     }
-    75% {
-        transform: translateY(-15px);
-    }
+
     100% {
-        transform: translateY(0);
+        top: calc(100vh - 150px);
+        left: calc(100vw - 100px);
     }
 }
 
-@keyframes bounceMove3 {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateY(-10px);
-    }
-    50% {
-        transform: translateY(0);
-    }
-    75% {
-        transform: translateY(5px);
-    }
-    100% {
-        transform: translateY(0);
-    }
+
+/***************************************************************************/
+/************************* User classes ***************************/
+/***************************************************************************/
+
+/* Rectangle "Connecté avec..." */
+.rectangle-status {
+    width: calc(700px); /* Largeur augmentée */
+    margin: 20px auto;
+    padding: 10px;
+    background-color: var(--secondary-color-contrast);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
-@keyframes bounceMove4 {
-    0%, 100% {
-        transform: translateY(0) rotate(5deg); /* Rotation subtile */
-    }
-    25% {
-        transform: translateY(-20px) rotate(-5deg);
-    }
-    50% {
-        transform: translateY(0) rotate(5deg);
-    }
-    75% {
-        transform: translateY(10px) rotate(-3deg);
-    }
-    100% {
-        transform: translateY(0) rotate(5deg);
-    }
+/* Container des deux rectangles */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px; /* Espace entre les rectangles augmenté */
+    padding: 20px;
 }
 
-/* Placer les cartes dans les tiers de l'écran et les ajuster avec des animations différentes */
-
-.favorites-pkm-card:nth-child(1) {
-    left: calc(33.33% - 7.5vw); /* Placer à gauche dans le tiers central */
-    bottom: 5%; /* Plus près du footer */
-    animation: bounceMove1 4s ease-in-out infinite;
-    animation-delay: 0s;
+/* Rectangles Connexion et Inscription */
+.rectangle {
+    width: 350px; /* Largeur augmentée */
+    background-color: var(--neutral-color);
+    border: 2px solid var(--neutral-color-accentuated);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .favorites-pkm-card:nth-child(2) {
@@ -419,20 +478,26 @@ footer p {
 #collection-pkm-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px; /* Espace entre les cartes */
+    gap: 15px;
+    /* Espace entre les cartes */
     justify-content: center;
-    padding: 5px; /* Espacement minimal avec le bord de l'écran */
+    padding: 5px;
+    /* Espacement minimal avec le bord de l'écran */
 }
 
 /* Style des cartes Pokémon */
 .collection-pkm-card {
-    width: calc((100% - 90px) / 6); /* Taille ajustée pour un maximum de 6 cartes côte à côte */
-    max-width: 160px; /* Taille maximale des cartes */
-    height: auto; /* La hauteur s'ajuste automatiquement */
+    width: calc((100% - 90px) / 6);
+    /* Taille ajustée pour un maximum de 6 cartes côte à côte */
+    max-width: 160px;
+    /* Taille maximale des cartes */
+    height: auto;
+    /* La hauteur s'ajuste automatiquement */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* Distribution égale entre les éléments */
+    justify-content: space-between;
+    /* Distribution égale entre les éléments */
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -445,43 +510,53 @@ footer p {
 /* Alignement du numéro */
 .collection-pkm-card p:first-of-type {
     font-size: 14px;
-    font-weight: normal; /* Texte en style normal */
+    font-weight: normal;
+    /* Texte en style normal */
     color: #555;
     margin: 0 0 8px 0;
-    display: inline-block; /* Aligné sur une seule ligne */
+    display: inline-block;
+    /* Aligné sur une seule ligne */
 }
 
 /* Style des images */
 .collection-pkm-card img {
-    max-width: 100%; /* L'image ne déborde jamais du conteneur */
+    max-width: 100%;
+    /* L'image ne déborde jamais du conteneur */
     height: auto;
     margin-bottom: 8px;
-    flex-shrink: 0; /* Évite que l'image se réduise trop */
+    flex-shrink: 0;
+    /* Évite que l'image se réduise trop */
 }
 
 /* Nom en dessous de l'image */
 .collection-pkm-card p:last-of-type {
-    font-family: "Pokemon", sans-serif; /* Remplacez par une typo Pokémon si disponible */
-    font-weight: normal; /* Texte en style normal */
+    font-family: "Pokemon", sans-serif;
+    /* Remplacez par une typo Pokémon si disponible */
+    font-weight: normal;
+    /* Texte en style normal */
     font-size: 14px;
     margin: 0 0 8px 0;
     color: #333;
-    flex-shrink: 0; /* Évite que le texte se réduise */
+    flex-shrink: 0;
+    /* Évite que le texte se réduise */
 }
 
 /* Boutons dans les cartes */
 .collection-btn-favorite {
-    width: 90%; /* Largeur légèrement réduite pour laisser un espace autour */
+    width: 90%;
+    /* Largeur légèrement réduite pour laisser un espace autour */
     padding: 6px 0;
     font-size: 14px;
-    font-weight: normal; /* Texte en style normal */
+    font-weight: normal;
+    /* Texte en style normal */
     background-color: #ff0000;
     color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: auto; /* Place le bouton en bas de la carte */
+    margin-top: auto;
+    /* Place le bouton en bas de la carte */
 }
 
 .collection-btn-favorite:hover {
@@ -497,7 +572,8 @@ footer p {
 /* Adaptation pour les écrans étroits */
 @media (max-width: 768px) {
     .collection-pkm-card {
-        width: calc((100% - 45px) / 3); /* Ajustement à 3 cartes par ligne */
+        width: calc((100% - 45px) / 3);
+        /* Ajustement à 3 cartes par ligne */
         max-width: 100px;
     }
 
@@ -508,17 +584,18 @@ footer p {
 
 @media (max-width: 480px) {
     .collection-pkm-card {
-        width: calc((100% - 30px) / 2); /* Ajustement à 2 cartes par ligne */
+        width: calc((100% - 30px) / 2);
+        /* Ajustement à 2 cartes par ligne */
         max-width: 120px;
     }
 }
+
 /***************************************************************************/
 /************************* User classes ***************************/
 /***************************************************************************/
 
 .rectangle-status {
-    width: 100%;
-    max-width: 700px;
+    width: calc(700px); /* Largeur augmentée */
     margin: 20px auto;
     padding: 10px;
     background-color: var(--secondary-color-contrast);
@@ -534,14 +611,13 @@ footer p {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 30px;
+    gap: 30px; /* Espace entre les rectangles augmenté */
     padding: 20px;
     flex-wrap: wrap;
 }
 
 .rectangle {
-    width: 100%;
-    max-width: 350px;
+    width: 350px; /* Largeur augmentée */
     background-color: var(--neutral-color);
     border: 2px solid var(--neutral-color-accentuated);
     border-radius: 10px;
@@ -592,56 +668,5 @@ footer p {
     background-color: var(--primary-color-hovered);
 }
 
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        gap: 20px;
-    }
 
-    .rectangle-status {
-        font-size: 1rem;
-    }
-
-    .rectangle h2 {
-        font-size: 1.1rem;
-    }
-
-    .rectangle form {
-        gap: 8px;
-    }
-
-    .rectangle button {
-        padding: 8px;
-    }
-
-    .logout-btn {
-        padding: 8px 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .rectangle-status {
-        font-size: 0.9rem;
-    }
-
-    .rectangle {
-        width: 100%;
-    }
-
-    .rectangle h2 {
-        font-size: 1rem;
-    }
-
-    .rectangle form {
-        gap: 5px;
-    }
-
-    .rectangle button {
-        padding: 6px;
-    }
-
-    .logout-btn {
-        padding: 6px 12px;
-    }
-}
 

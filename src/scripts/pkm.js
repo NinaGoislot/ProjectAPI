@@ -185,6 +185,162 @@ function toggleGameType(event) {
 }
 
 // --------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------- HELP GAME --------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------
+
+function getTypeHelp() {
+    // Désactiver boutons d'aide
+    const helpElements = document.querySelectorAll(".game-controls-help");
+    helpElements.forEach(helpElement => {
+        helpElement.classList.remove("active");
+    });
+
+    if (!pkmTypes || pkmTypes.length === 0) {
+        console.error("Les types du Pokémon ne sont pas disponibles.");
+        return;
+    }
+
+    const helpContainer = document.getElementById('help-container');
+    helpContainer.innerHTML = "";
+    helpContainer.classList.add("active");
+
+    const typesParagraph = document.createElement('p');
+    typesParagraph.classList.add('game-help-type-p');
+
+    // Séparer les types par des virgules
+    typesParagraph.innerText = `Types du Pokémon : ${pkmTypes.join(', ')}`;
+
+    helpContainer.appendChild(typesParagraph);
+
+    // Change shiny value drop
+    helped = true;
+    switch (currentGameType) {
+        case 1: //Guess sound
+            newShinyValue = PROBA_SHINY_SOUND / 2;
+            break;
+        case 2: //Guess shadpe
+            newShinyValue = PROBA_SHINY_SHADOW / 2;
+            break;
+        default:
+            break;
+    };
+}
+
+async function getSquareHelp() {
+    try {
+        const firstType = pkmTypes[0];
+
+        // Get pokémons du même type
+        const pokemonsWithSameType = await getPokemonByType(firstType);
+
+        // En garder 3 (en fr) et ajouter le vrai
+        const randomPokemons = await getRandomPokemons(pokemonsWithSameType, 3);
+        randomPokemons.push(pkmFrName);
+
+        // Mélanger les pkm
+        const shuffledPokemons = shuffleArray(randomPokemons);
+
+        // Add Buttons
+        const helpContainer = document.getElementById('help-container');
+
+        shuffledPokemons.forEach(pokemonName => {
+            //create button
+            const btn = document.createElement('button');
+            btn.innerText = pokemonName;
+            btn.classList.add('game-help-square-btn', 'btn');
+
+            // event listener
+            btn.addEventListener('click', () => {
+                const inputElement = document.getElementById('pkm-name-user');
+                inputElement.value = pokemonName; // Donner la valeur du bouton à l'input de réponse de base
+                checkPkmName();
+            });
+
+            // add btn to container
+            helpContainer.classList.add("active");
+            helpContainer.appendChild(btn);
+        });
+
+        // Désactiver boutons d'aide et l'input user
+        const helpElements = document.querySelectorAll(".game-controls-help");
+        helpElements.forEach(helpElement => {
+            helpElement.classList.remove("active");
+        });
+
+        const guessGroupElement = document.getElementById("game-pkm-name-try");
+        guessGroupElement.classList.remove("active");
+
+        // Change shiny value drop
+        helped = true;
+        switch (currentGameType) {
+            case 1: //Guess sound
+                newShinyValue = PROBA_SHINY_SOUND / 4;
+                break;
+            case 2: //Guess shape
+                newShinyValue = PROBA_SHINY_SHADOW / 4;
+                break;
+            default:
+                break;
+        }
+    } catch (error) {
+        console.error("Erreur dans getSquareHelp :", error);
+    }
+}
+
+async function getPokemonByType(type) {
+    const url = `${PROTOCOLE_API}://${URL_API}/type/${type}`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Erreur lors de la récupération des Pokémon pour le type ${type}`);
+        const typeData = await response.json();
+
+        return typeData.pokemon;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+
+async function getPokemonNameInFrench(pokemonUrl) {
+    try {
+        const response = await fetch(pokemonUrl);
+        if (!response.ok) throw new Error(`Erreur lors de la récupération du Pokémon à l'URL : ${pokemonUrl}`);
+        const data = await response.json();
+
+        const speciesUrl = data.species.url;
+        const speciesResponse = await fetch(speciesUrl);
+        if (!speciesResponse.ok) throw new Error(`Erreur lors de la récupération des données de l'espèce : ${speciesUrl}`);
+        const speciesData = await speciesResponse.json();
+
+        const frenchNameEntry = speciesData.names.find(nameEntry => nameEntry.language.name === "fr");
+        return frenchNameEntry ? frenchNameEntry.name : data.name; // Nom anglais par défaut
+    } catch (error) {
+        console.error("Erreur dans getPokemonNameInFrench :", error);
+        return "Nom inconnu";
+    }
+}
+
+
+async function getRandomPokemons(pokemons, count) {
+    try {
+        const validPokemons = pokemons.filter(pokemon => pokemon && pokemon.pokemon && pokemon.pokemon.name);
+        const shuffledPokemons = shuffleArray(validPokemons).slice(0, count);
+        // Noms en français pour chaque Pokémon
+        const pokemonNamesInFrench = await Promise.all(
+            shuffledPokemons.map(pokemon => getPokemonNameInFrench(pokemon.pokemon.url))
+        );
+        return pokemonNamesInFrench;
+    } catch (error) {
+        console.error("Erreur dans getRandomPokemons :", error);
+        return [];
+    }
+}
+
+function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+// --------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------- EVENTS LISTENERS ----------------------------------------------
 // --------------------------------------------------------------------------------------------------------------
 
