@@ -15,7 +15,7 @@ if (!currentPlayer) {
 // --------------------------------------------------------------------------------------------------------------
 
 function displayAllPokemons() {
-    const pokemonList = document.getElementById("collection-pkm-list");
+    const pokemonList = document.getElementById("selectPkm-pkm-list");
 
     // Trier les Pokémon par ID croissant
     currentPlayer.pokemons.sort((a, b) => a.id - b.id);
