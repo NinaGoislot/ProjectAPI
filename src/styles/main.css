@@ -1,6 +1,7 @@
 /***************************************************************************/
 /***************************** Global classes ******************************/
 /***************************************************************************/
+
 @font-face {
     font-family: 'Pokemon';
     src: url('./fonts/minecraft.ttf') format('truetype');
@@ -12,13 +13,14 @@ body {
     max-width: 100vw;
     display: flex;
     flex-direction: column;
-    font-family: 'PokemonPixel', sans-serif; /* Application de la typo à tout le body */
+    font-family: 'PokemonPixel', sans-serif;
     line-height: 1.6;
 }
 
 main {
     flex: 1;
     padding: 1rem;
+    box-sizing: border-box;
 }
 
 * {
@@ -32,21 +34,21 @@ header, footer {
     background-color: #b20000;
     color: #fff;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px 2%;
 }
 
 /* Navigation du header */
 header nav {
     display: flex;
     justify-content: flex-start;
-    gap: 40px;
-    padding-left: 20px;
+    gap: 3vw;
+    padding-left: 5%;
 }
 
 header nav a {
     color: #fff;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.5rem;  /* Taille plus adaptée à différentes résolutions */
     font-weight: bold;
     transition: color 0.3s ease;
 }
@@ -57,10 +59,10 @@ header nav a:hover {
 
 /* Style pour le titre et les icônes */
 .poke-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-align: left;
     font-family: 'Pokemon', sans-serif;
-    margin-left: 20px;
+    margin-left: 2vw;
 }
 
 /* Conteneur de l'en-tête */
@@ -68,28 +70,30 @@ header nav a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 1rem 5%;
+    width: 100%;
 }
 
 /* Conteneur des icônes */
 .header-right {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espacement entre les icônes */
+    gap: 1.5rem; /* Espacement entre les icônes */
 }
 
 /* Style pour les icônes */
 .header-button {
-    width: 40px;
-    height: 40px;
+    width: 4vw;
+    height: 4vw;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
 
 /* Effet au survol des icônes */
 .header-button:hover {
-    transform: scale(1.1); /* Agrandir légèrement */
+    transform: scale(1.1);
 }
+
 footer {
     padding: 10px 0;
     background-color: #b20000;
@@ -99,36 +103,42 @@ footer {
 }
 
 footer p {
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
+
 /***************************************************************************/
-/****************************** Index classes *******************************/
+/***************************** index classes ******************************/
 /***************************************************************************/
+
 .index-background-container {
-    position: fixed; /* Assure que l'image reste en arrière-plan et fixe */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../styles/images/backmaybe.gif'); 
-    background-size: cover; 
-    background-repeat: no-repeat; 
+    background-image: url('../styles/images/backmaybe.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
-    z-index: -1; 
-    filter: brightness(70%); 
+    z-index: -1;
+    filter: brightness(70%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
-
 
 .play-button {
     position: absolute;
-    top: 45%; 
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
-    padding: 20px 40px;
+    padding: 3vw 6vw;
     text-align: center;
     font-family: 'Pokemon', sans-serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: white;
     text-decoration: none;
     background: transparent;
@@ -136,12 +146,74 @@ footer p {
     transition: all 0.3s ease-in-out;
     z-index: 10;
     border: 5px solid transparent;
-    border-image: url('./images/rect.png') 30 round; 
+    border-image: url('./images/rect.png') 30 round;
+}
+
+.connect-message {
+    position: absolute;
+    top: calc(45% + 100px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Pokemon', sans-serif;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    margin-top: 5px;
+    z-index: 10;
+    opacity: 0.8;
+    width: 90%;
+    max-width: 320px;
 }
 
 .play-button:hover {
-    background-color: white; 
-    color: #b20000; 
+    background-color: white;
+    color: #b20000;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+    .poke-title {
+        font-size: 1.2rem;  /* Réduction pour les écrans plus petits */
+        margin-left: 3vw;
+    }
+
+    .header {
+        padding: 1rem 3%; /* Moins d'espace sur les petits écrans */
+    }
+
+    header nav {
+        gap: 2vw;
+    }
+
+    header nav a {
+        font-size: 1rem; /* Adaptation de la taille des liens */
+    }
+
+    .play-button {
+        font-size: 1.2rem;
+        padding: 5vw 7vw;
+    }
+
+    .connect-message {
+        font-size: 0.9rem;
+        width: 85%;
+        max-width: 270px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .poke-title {
+        font-size: 1rem;
+    }
+
+    .play-button {
+        font-size: 1rem;
+        padding: 4vw 6vw;
+    }
+
+    .connect-message {
+        font-size: 0.8rem;
+    }
 }
 
 
