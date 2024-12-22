@@ -140,7 +140,8 @@ function checkPkmName() {
                     id: pkmID,
                     name: pkmFrName,
                     sprite: pkmSprite,
-                    shiny: isShiny
+                    shiny: isShiny,
+                    favorite: false
                 };
 
                 currentPlayer.pokemons.push(newPokemon);

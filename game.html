@@ -14,15 +14,18 @@
         <nav>
             <a href="./index.html">Retour</a>
             <a href="./user.html">Se connecter</a>
+            <a href="./favorites.html">Favorites</a>
+            <a href="./selectPokemon.html">Choose favorites</a>
         </nav>
     </header>
 
     <main class="game-main">
-        <div id="game-switch" class="game-switch">
-            <label>Cris</label>
+        <div id="game-switch" class="game-switch" role="radiogroup" aria-labelledby="game-switch-label">
+            <p id="game-switch-label">Type de jeu :</p>
+            <label for="game-mode-sound">Cris</label>
             <input id="game-mode-sound" type="radio" name="game-type" value="1" checked />
             
-            <label>Silhouette</label>
+            <label for="game-mode-shape">Silhouette</label>
             <input id="game-mode-shape" type="radio" name="game-type" value="2" />
 
             <p id="game-current-type">Type de jeu actuel : Guess Sound</p>

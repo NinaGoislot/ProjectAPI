@@ -3,17 +3,23 @@ img {
 }
 
 
+/***************************************************************************/
 /***************************** Global classes ******************************/
+/***************************************************************************/
 body {
     margin: 0;
 
-    max-height: 100vh;
+    min-height: 100vh;
     max-width: 100vw;
+}
 
+main {
     padding: 1rem;
 }
 
+/***************************************************************************/
 /****************************** Game classes *******************************/
+/***************************************************************************/
 
 #game-sprite-pkm {
     width: 100%;
@@ -47,3 +53,63 @@ body {
 .game-game-area .game-pkm-guess .game-pkm-name-try.active {
     display: flex;
 }
+
+/***************************************************************************/
+/*************************** Favorites classes *****************************/
+/***************************************************************************/
+
+.favorites-pkm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.favorites-pkm .favorites-pkm-list {
+    width: 50%;
+    height: 50vh;
+
+    position: relative;
+    overflow: hidden; /* Empêche les sprites de sortir visuellement */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+}
+
+.favorites-pkm .favorites-pkm-list .favorites-pkm-card img {
+    width: 200px;
+}
+
+.favorites-pkm-sprite {
+    width: 100px; 
+    height: auto;
+    animation: jump 0.5s ease-in-out infinite; /* Animation de gauche à droite */
+}
+
+
+/* Animation de saut */
+@keyframes jump {
+    0%, 50%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-20px); 
+    }
+}
+
+@keyframes move-left-right {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(50%); /* Se déplace vers la droite */
+    }
+    100% {
+        transform: translateX(0); /* Retourne à gauche */
+    }
+}
+
+/***************************************************************************/
+/************************* SelectPokemon classes ***************************/
+/***************************************************************************/
