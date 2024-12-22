@@ -10,11 +10,9 @@
 }
 @font-face {
     font-family: "PokemonPixels";
-    src: url("./src/fonts/Pokemon pixels 2 V1.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-}
-
+    
+        src: url('../fonts/minecraft.ttf') format('truetype'); /* Assuming fonts is one level up */
+    }
 
 body {
     font-family: "PokemonPixels", sans-serif;
@@ -57,7 +55,7 @@ header nav {
 header nav a {
     color: var(--color-white);
     text-decoration: none;
-    font-size: 1.5rem;  /* Taille plus adaptée à différentes résolutions */
+    font-size: 1.5rem;  
     font-weight: bold;
     transition: color 0.3s ease;
 }
@@ -86,7 +84,7 @@ header nav a:hover {
 .header-right {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Espacement entre les icônes */
+    gap: 1.5rem;
 }
 
 /* Style pour les icônes */
@@ -259,19 +257,30 @@ footer p {
 .game-game-area .game-pkm-guess .game-pkm-name-try.active {
     display: flex;
 }
-
 /***************************************************************************/
 /*************************** Favorites classes *****************************/
 /***************************************************************************/
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
 
 .favorites-pkm {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
+    min-height: 100vh; /* Utilisation de 100vh pour couvrir toute la hauteur de la page */
+    width: 100%; /* S'assurer que la largeur est également de 100% */
+    background-image: url('src/images/garden.png'); /* Utiliser des slashs pour les chemins */
+    background-size: cover; /* Assurer que l'image couvre toute la zone */
+    background-position: center; /* Centrer l'image */
+    background-repeat: no-repeat; /* Empêcher la répétition */
 }
 
-.favorites-pkm .favorites-pkm-list {
+.favorites-pkm-list {
     width: 50%;
     height: 50vh;
     position: relative;
@@ -280,23 +289,14 @@ footer p {
     justify-content: center;
     align-items: center;
     border: 2px dashed var(--color-light-border);
+    background-color: rgba(255, 255, 255, 0.5); /* Optionnel : ajouter un fond transparent pour mettre en valeur la liste */
 }
 
-.favorites-pkm .favorites-pkm-list .favorites-pkm-card img {
+.favorites-pkm-card img {
     width: 200px;
     height: auto;
-}
-
-.favorites-pkm .favorites-pkm-list .favorites-pkm-card .favorites-pkm-sprite.jump-animation {
-    animation: jump 0.5s ease-in-out;
-}
-
-.favorites-pkm .favorites-pkm-list .favorites-pkm-card .favorites-pkm-sprite.jump-animation-infinite {
-    animation: jump 0.5s ease-in-out infinite;
-}
-
-.favorites-pkm .favorites-pkm-list .favorites-pkm-card .favorites-pkm-sprite.transform-animation {
-    transition: transform 3s ease-in-out;
+    position: absolute;
+    animation: jump-move 4s infinite;
 }
 
 /* Animation de saut */
@@ -309,23 +309,35 @@ footer p {
     }
 }
 
-@keyframes move-left {
-    0% {
-        transform: translateX(0);
+/* Déplacement aléatoire */
+@keyframes move-random {
+    0%, 100% {
+        transform: translate(0, 0);
     }
-    50%,100% {
-        transform: translateX(-50%);
+    25% {
+        transform: translate(calc(-10% + 20px), calc(-10% + 20px));
+    }
+    50% {
+        transform: translate(calc(10% - 20px), calc(10% - 20px));
+    }
+    75% {
+        transform: translate(calc(-5% + 10px), calc(-5% + 10px));
     }
 }
 
-@keyframes move-left-to-center {
-    0% {
-        transform: translateX(0);
+/* Animation combinée : saut + déplacement */
+@keyframes jump-move {
+    0%, 50%, 100% {
+        transform: translateY(0);
     }
-    50%,100% {
-        transform: translateX(50%);
+    25% {
+        transform: translateY(-20px);
+    }
+    75% {
+        animation: move-random 3s;
     }
 }
+
 
 /***************************************************************************/
 /************************* User classes ***************************/
@@ -419,7 +431,7 @@ footer p {
 #collection-pkm-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px; /* Espace entre les cartes (les rectangles ne se touchent pas) */
+    gap: 15px; /* Espace entre les cartes */
     justify-content: center;
     padding: 5px; /* Espacement minimal avec le bord de l'écran */
 }
@@ -428,11 +440,11 @@ footer p {
 .collection-pkm-card {
     width: calc((100% - 90px) / 6); /* Taille ajustée pour un maximum de 6 cartes côte à côte */
     max-width: 160px; /* Taille maximale des cartes */
-    height: 200px; /* Hauteur adaptée pour inclure les modifications */
+    height: auto; /* La hauteur s'ajuste automatiquement */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between; /* Distribution égale entre les éléments */
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -442,44 +454,46 @@ footer p {
     text-align: center;
 }
 
-/* Alignement du numéro et de l'image */
+/* Alignement du numéro */
 .collection-pkm-card p:first-of-type {
     font-size: 14px;
-    font-weight: normal;
+    font-weight: normal; /* Texte en style normal */
     color: #555;
-    margin-bottom: 8px;
+    margin: 0 0 8px 0;
     display: inline-block; /* Aligné sur une seule ligne */
 }
 
 /* Style des images */
 .collection-pkm-card img {
-    max-width: 100%;
+    max-width: 100%; /* L'image ne déborde jamais du conteneur */
     height: auto;
     margin-bottom: 8px;
+    flex-shrink: 0; /* Évite que l'image se réduise trop */
 }
 
 /* Nom en dessous de l'image */
 .collection-pkm-card p:last-of-type {
     font-family: "Pokemon", sans-serif; /* Remplacez par une typo Pokémon si disponible */
-    font-weight: bold;
-    font-size: 16px;
-    margin: 0;
+    font-weight: normal; /* Texte en style normal */
+    font-size: 14px;
+    margin: 0 0 8px 0;
     color: #333;
+    flex-shrink: 0; /* Évite que le texte se réduise */
 }
 
 /* Boutons dans les cartes */
 .collection-btn-favorite {
-    width: 100%; /* Largeur égale à celle du rectangle */
-    padding: 8px 0;
+    width: 90%; /* Largeur légèrement réduite pour laisser un espace autour */
+    padding: 6px 0;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: normal; /* Texte en style normal */
     background-color: #ff0000;
     color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: auto; /* Aligne le bouton en bas du rectangle */
+    margin-top: auto; /* Place le bouton en bas de la carte */
 }
 
 .collection-btn-favorite:hover {
@@ -497,7 +511,6 @@ footer p {
     .collection-pkm-card {
         width: calc((100% - 45px) / 3); /* Ajustement à 3 cartes par ligne */
         max-width: 100px;
-        height: 180px;
     }
 
     .collection-btn-favorite {
@@ -509,6 +522,5 @@ footer p {
     .collection-pkm-card {
         width: calc((100% - 30px) / 2); /* Ajustement à 2 cartes par ligne */
         max-width: 120px;
-        height: 150px;
     }
 }
