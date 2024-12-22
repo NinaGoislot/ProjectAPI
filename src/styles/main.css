@@ -8,11 +8,11 @@
     --color-light-border: #ccc;
     --color-dark-red: #900000;
 }
+
 @font-face {
     font-family: "PokemonPixels";
-    
-        src: url('../fonts/minecraft.ttf') format('truetype'); /* Assuming fonts is one level up */
-    }
+    src: url('../fonts/minecraft.ttf') format('truetype'); /* Assuming fonts is one level up */
+}
 
 body {
     font-family: "PokemonPixels", sans-serif;
@@ -22,26 +22,42 @@ body {
     display: flex;
     flex-direction: column;
     line-height: 1.6;
+    position: relative;
 }
 
 main {
     flex: 1;
     padding: 1rem;
     box-sizing: border-box;
+    padding-top: 80px; /* For header */
+    padding-bottom: 80px; /* For footer */
+    overflow-y: auto;
 }
 
+/* Reset de marges et paddings */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Header et footer rouges */
+/* Header et footer fixes */
 header, footer {
     background-color: var(--color-red);
     color: var(--color-white);
     text-align: center;
     padding: 10px 2%;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+header {
+    top: 0;
+}
+
+footer {
+    bottom: 0;
 }
 
 /* Navigation du header */
@@ -55,7 +71,7 @@ header nav {
 header nav a {
     color: var(--color-white);
     text-decoration: none;
-    font-size: 1.5rem;  
+    font-size: 1.5rem;
     font-weight: bold;
     transition: color 0.3s ease;
 }
@@ -105,12 +121,12 @@ footer {
     background-color: var(--color-red);
     color: var(--color-white);
     text-align: center;
-    margin-top: auto;
 }
 
 footer p {
     font-size: 1rem;
 }
+
 
 /***************************************************************************/
 /***************************** index classes ******************************/
@@ -262,22 +278,42 @@ footer p {
 /***************************************************************************/
 
 .favorites-pkm {
-    position: relative;
-    background-image: url('src/images/garden.png'); /* Image de fond */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/garden.png');
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
-    height: 100vh; /* Hauteur de la page */
-    overflow: hidden; /* Empêche le débordement des Pokémon */
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
+/* Style pour tous les Pokémon placés juste au-dessus du footer */
+.favorites-pkm {
+    position: relative;
+    background-image: url('src/images/garden.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+/* Fixer tous les Pokémon juste au-dessus du footer */
 .favorites-pkm-card {
     position: absolute;
-    width: 100px; /* Taille de chaque Pokémon */
-    height: 100px;
+    bottom: 100px; /* Tous les Pokémon seront à 100px au-dessus du footer */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    animation: moveRandomly 5s infinite ease-in-out, jump 1s infinite ease-in-out;
+    width: 150px; /* Taille des Pokémon */
+    height: 150px; /* Taille des Pokémon */
+    animation: jump 1s infinite ease-in-out, move 3s infinite linear; /* Ralentir la vitesse de déplacement */
 }
 
 /* Animation de saut */
@@ -286,105 +322,25 @@ footer p {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-20px);
+        transform: translateY(-10px); /* Moins de hauteur pour le saut */
     }
 }
 
-/* Animation de mouvement aléatoire */
-@keyframes moveRandomly {
+/* Animation de déplacement (gauche-droite lent et court) */
+@keyframes move {
     0% {
-        top: calc(100vh - 150px);
-        left: 0;
+        transform: translateX(0);
+    }
+    33% {
+        transform: translateX(-20px); /* Déplacement à gauche réduit */
+    }
+    66% {
+        transform: translateX(20px); /* Déplacement à droite réduit */
     }
     100% {
-        top: calc(100vh - 150px);
-        left: calc(100vw - 100px);
+        transform: translateX(0);
     }
 }
-
-
-/***************************************************************************/
-/************************* User classes ***************************/
-/***************************************************************************/
-
-/* Rectangle "Connecté avec..." */
-.rectangle-status {
-    width: calc(700px); /* Largeur augmentée */
-    margin: 20px auto;
-    padding: 10px;
-    background-color: var(--color-light-green);
-    border: 2px solid var(--color-dark-green);
-    border-radius: 10px;
-    text-align: center;
-    color: var(--color-dark-green);
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-/* Container des deux rectangles */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 30px; /* Espace entre les rectangles augmenté */
-    padding: 20px;
-}
-
-/* Rectangles Connexion et Inscription */
-.rectangle {
-    width: 350px; /* Largeur augmentée */
-    background-color: var(--color-light-gray);
-    border: 2px solid var(--color-light-border);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.rectangle h2 {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.rectangle form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.rectangle button {
-    background-color: var(--color-red);
-    color: var(--color-white);
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.rectangle button:hover {
-    background-color: var(--color-dark-red);
-}
-
-/* Bouton "Se déconnecter" */
-.logout-btn {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: var(--color-red);
-    color: var(--color-white);
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.logout-btn:hover {
-    background-color: var(--color-dark-red);
-}
-
-
 
 
 /***************************************************************************/
@@ -488,3 +444,86 @@ footer p {
         max-width: 120px;
     }
 }
+/***************************************************************************/
+/************************* User classes ***************************/
+/***************************************************************************/
+
+/* Rectangle "Connecté avec..." */
+.rectangle-status {
+    width: calc(700px); /* Largeur augmentée */
+    margin: 20px auto;
+    padding: 10px;
+    background-color: var(--color-light-green);
+    border: 2px solid var(--color-dark-green);
+    border-radius: 10px;
+    text-align: center;
+    color: var(--color-dark-green);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Container des deux rectangles */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px; /* Espace entre les rectangles augmenté */
+    padding: 20px;
+}
+
+/* Rectangles Connexion et Inscription */
+.rectangle {
+    width: 350px; /* Largeur augmentée */
+    background-color: var(--color-light-gray);
+    border: 2px solid var(--color-light-border);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rectangle h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.rectangle form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rectangle button {
+    background-color: var(--color-red);
+    color: var(--color-white);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.rectangle button:hover {
+    background-color: var(--color-dark-red);
+}
+
+/* Bouton "Se déconnecter" */
+.logout-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--color-dark-red);
+}
+
+
+
