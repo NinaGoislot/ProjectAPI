@@ -255,6 +255,16 @@ footer p {
     display: flex;
 }
 
+/* Section controls */
+.game-controls .game-controls-help, .game-controls .game-help-items{
+    display: none;
+}
+
+.game-controls .game-controls-help.active, .game-controls .game-help-items.active {
+    display: block;
+}
+
+
 /***************************************************************************/
 /*************************** Favorites classes *****************************/
 /***************************************************************************/
