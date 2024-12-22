@@ -3,7 +3,7 @@
 /***************************************************************************/
 @font-face {
     font-family: 'Pokemon';
-    src: url('./fonts/Pokemon Solid.ttf') format('truetype');
+    src: url('./fonts/minecraft.ttf') format('truetype');
 }
 
 body {
@@ -114,11 +114,35 @@ footer p {
     background-size: cover; /* L'image couvre toute la fenêtre */
     background-repeat: no-repeat; /* Pas de répétition de l'image */
     background-position: center; /* L'image est centrée */
-    z-index: -1; /* Met la div derrière le contenu principal */
-    filter: brightness(70%); /* Rend l'image un peu plus sombre pour améliorer la lisibilité */
+    z-index: -1; 
+    filter: brightness(70%); 
 }
 
+/* Bouton "Jouer" pixel art avec border-image */
+.play-button {
+    position: absolute;
+    top: 45%; /* Ajuste la position légèrement au-dessus du centre */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 20px 40px;
+    text-align: center;
+    font-family: 'Minecraft', sans-serif; /* Utilise la police Minecraft */
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+    border: 5px solid transparent; /* Bordure transparente pour que l'image de bordure soit visible */
+    border-image: url('./images/pixel-border.png') 30 round; /* Utilise l'image pour la bordure */
+}
 
+.play-button:hover {
+    background-color: white; /* Fond blanc au survol */
+    color: #b20000; /* Texte rouge */
+}
 
 
 /***************************************************************************/
