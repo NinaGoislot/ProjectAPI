@@ -175,7 +175,7 @@ function savePlayerData() {
 // ---------------------------------------------- INITIALISATION ------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------
 window.addEventListener("load", () => {
-    const currentPath = window.location.pathname; // Chemin de la page
+    const currentPath = window.location.pathname;
 
     if (currentPath.includes("favorites.html")) {
         displayFavPokemons();
