@@ -20,7 +20,8 @@
 }
 
 body {
-    font-family: "PokemonPixels", sans-serif;
+    font-family:  sans-serif;
+    margin-top: 1rem;
     min-height: 100vh;
     max-width: 100vw;
     display: flex;
@@ -36,22 +37,21 @@ main {
     padding: 1rem;
     box-sizing: border-box;
     padding-top: 80px;
-    /* For header */
+    
     padding-bottom: 80px;
-    /* For footer */
+  
     overflow-y: auto;
 }
 
-/* Reset de marges et paddings */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Header et footer fixes */
-header,
-footer {
+header, footer {
+    font-family: "PokemonPixels", sans-serif;
     background-color: var(--primary-color);
     color: var(--light-color);
     text-align: center;
@@ -69,7 +69,6 @@ footer {
     bottom: 0;
 }
 
-/* Navigation du header */
 header nav {
     display: flex;
     justify-content: flex-start;
@@ -89,14 +88,12 @@ header nav a:hover {
     color: var(--primary-color-contrast);
 }
 
-/* Style pour le titre et les icônes */
 .poke-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
     text-align: left;
     margin-left: 2vw;
 }
 
-/* Conteneur de l'en-tête */
 .header {
     display: flex;
     justify-content: space-between;
@@ -105,22 +102,19 @@ header nav a:hover {
     width: 100%;
 }
 
-/* Conteneur des icônes */
 .header-right {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
 
-/* Style pour les icônes */
 .header-button {
-    width: 4vw;
-    height: 4vw;
+    width: 2em;
+    height: 2em;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
 
-/* Effet au survol des icônes */
 .header-button:hover {
     transform: scale(1.1);
 }
@@ -177,26 +171,6 @@ footer p {
     align-items: center;
     min-height: 100vh;
 }
-
-.play-button {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: inline-block;
-    padding: 3vw 6vw;
-    text-align: center;
-    font-size: 2rem;
-    color: var(--light-color);
-    text-decoration: none;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    z-index: 10;
-    border: 5px solid transparent;
-    border-image: url('.\src\images\rect.png') 30 round;
-}
-
 .connect-message {
     position: absolute;
     top: calc(45% + 100px);
@@ -212,22 +186,54 @@ footer p {
     max-width: 320px;
 }
 
+
+.play-button {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold; 
+    color: var(--light-color);
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid var(--light-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+}
+
+@media screen and (max-width: 600px) {
+    .play-button {
+        font-size: 1rem;
+        padding: 0.4em 0.8em;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .play-button {
+        font-size: 0.9rem;
+        padding: 0.3em 0.6em;
+    }
+}
+
+
+
 .play-button:hover {
     background-color: var(--light-color);
     color: var(--primary-color);
 }
 
-/* Responsive styles */
-@media screen and (max-width: 600px) {
-    .poke-title {
-        font-size: 1.2rem;
-        /* Réduction pour les écrans plus petits */
-        margin-left: 3vw;
-    }
+
+
 
     .header {
         padding: 1rem 3%;
-        /* Moins d'espace sur les petits écrans */
+        
     }
 
     header nav {
@@ -236,7 +242,7 @@ footer p {
 
     header nav a {
         font-size: 1rem;
-        /* Adaptation de la taille des liens */
+        
     }
 
     .play-button {
@@ -249,7 +255,6 @@ footer p {
         width: 85%;
         max-width: 270px;
     }
-}
 
 @media screen and (max-width: 400px) {
     .poke-title {
@@ -266,6 +271,9 @@ footer p {
     }
 }
 
+/***************************************************************************/
+/****************************** Game classes *******************************/
+/***************************************************************************/
 /***************************************************************************/
 /****************************** Game classes *******************************/
 /***************************************************************************/
@@ -428,22 +436,20 @@ main.game-main section.game-game-area {
 }
 
 
-
-
 /***************************************************************************/
 /*************************** Favorites classes *****************************/
 /***************************************************************************/
-
 .favorites-pkm {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../images/garden.png');
-    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../images/backmaybe.gif');
+    background-size: 150% 150%;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
     z-index: -1;
     display: flex;
     flex-direction: column;
@@ -452,152 +458,150 @@ main.game-main section.game-game-area {
     min-height: 100vh;
 }
 
-/* Style pour tous les Pokémon placés juste au-dessus du footer */
+.favorites-pkm-card img {
+    width: 15vw;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .favorites-pkm-card img {
+        width: 30vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .favorites-pkm-card img {
+        width: 40vw;
+    }
+}
+
 .favorites-pkm {
-    position: relative;
+    position: fixed;
     background-image: url('src/images/garden.png');
     background-size: cover;
     background-position: center;
-    height: 100vh;
 }
 
-/* Fixer tous les Pokémon juste au-dessus du footer */
 .favorites-pkm-card {
     position: absolute;
-    bottom: 100px;
-    /* Tous les Pokémon seront à 100px au-dessus du footer */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 150px;
-    /* Taille des Pokémon */
-    height: 150px;
-    /* Taille des Pokémon */
-    animation: jump 1s infinite ease-in-out, move 3s infinite linear;
-    /* Ralentir la vitesse de déplacement */
+    transform-origin: center;
 }
 
-/* Animation de saut */
-@keyframes jump {
 
-    0%,
+
+@keyframes bounceMove1 {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-30px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(10px);
+    }
     100% {
         transform: translateY(0);
     }
+}
 
+@keyframes bounceMove2 {
+    0%, 100% {
+        transform: translateY(0) scaleX(1);
+    }
+    25% {
+        transform: translateY(-25px) scaleX(-1); 
+    }
     50% {
-        transform: translateY(-10px);
-        /* Moins de hauteur pour le saut */
+        transform: translateY(0) scaleX(1);
     }
-}
-
-/* Animation de déplacement (gauche-droite lent et court) */
-@keyframes move {
-    0% {
-        transform: translateX(0);
+    75% {
+        transform: translateY(-15px);
     }
-
-    33% {
-        transform: translateX(-20px);
-        /* Déplacement à gauche réduit */
-    }
-
-    66% {
-        transform: translateX(20px);
-        /* Déplacement à droite réduit */
-    }
-
     100% {
-        top: calc(100vh - 150px);
-        left: calc(100vw - 100px);
+        transform: translateY(0);
     }
 }
 
-
-/***************************************************************************/
-/***************************** User classes ********************************/
-/***************************************************************************/
-
-/* Rectangle "Connecté avec..." */
-.rectangle-status {
-    width: calc(700px);
-    /* Largeur augmentée */
-    margin: 20px auto;
-    padding: 10px;
-    background-color: var(--secondary-color-contrast);
-    border: 2px solid var(--secondary-color);
-    border-radius: 10px;
-    text-align: center;
-    color: var(--secondary-color);
-    font-size: 1.2rem;
-    font-weight: bold;
+@keyframes bounceMove3 {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
-/* Container des deux rectangles */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 30px;
-    /* Espace entre les rectangles augmenté */
-    padding: 20px;
+@keyframes bounceMove4 {
+    0%, 100% {
+        transform: translateY(0) rotate(5deg); 
+    }
+    25% {
+        transform: translateY(-20px) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(5deg);
+    }
+    75% {
+        transform: translateY(10px) rotate(-3deg);
+    }
+    100% {
+        transform: translateY(0) rotate(5deg);
+    }
 }
 
-/* Rectangles Connexion et Inscription */
-.rectangle {
-    width: 350px;
-    /* Largeur augmentée */
-    background-color: var(--neutral-color);
-    border: 2px solid var(--neutral-color-accentuated);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Placer les cartes dans les tiers de l'écran et les ajuster avec des animations différentes */
+
+.favorites-pkm-card:nth-child(1) {
+    left: calc(33.33% - 7.5vw); 
+    bottom: 5%; 
+    animation: bounceMove1 4s ease-in-out infinite;
+    animation-delay: 0s;
 }
 
-.rectangle h2 {
-    text-align: center;
-    margin-bottom: 15px;
+.favorites-pkm-card:nth-child(2) {
+    left: calc(66.66% - 7.5vw);
+    bottom: 5%; 
+    animation: bounceMove2 5s ease-in-out infinite;
+    animation-delay: 1s;
 }
 
-.rectangle form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.favorites-pkm-card:nth-child(3) {
+    left: calc(33.33% - 7.5vw); 
+    bottom: 20%; 
+    animation: bounceMove3 3s ease-in-out infinite;
+    animation-delay: 2s;
 }
 
-.rectangle button {
-    background-color: var(--primary-color);
-    color: var(--light-color);
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.favorites-pkm-card:nth-child(4) {
+    left: calc(66.66% - 7.5vw);
+    bottom: 20%; 
+    animation: bounceMove4 6s ease-in-out infinite;
+    animation-delay: 3s;
 }
 
-.rectangle button:hover {
-    background-color: var(--primary-color-hovered);
+.favorites-pkm-card {
+    will-change: transform;
+    transition: transform 0.5s ease;
 }
 
-/* Bouton "Se déconnecter" */
-.logout-btn {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: var(--light-color);
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.favorites-pkm-card:hover {
+    transform: scale(1.1); /* ne fonctionne pas...*/
 }
-
-.logout-btn:hover {
-    background-color: var(--primary-color-hovered);
-}
-
 
 
 
@@ -605,30 +609,30 @@ main.game-main section.game-game-area {
 /************************* collection classes ***************************/
 /***************************************************************************/
 
-/* Container principal pour les Pokémon */
+
 #collection-pkm-list {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    /* Espace entre les cartes */
+    
     justify-content: center;
     padding: 5px;
-    /* Espacement minimal avec le bord de l'écran */
+   
 }
 
-/* Style des cartes Pokémon */
+
 .collection-pkm-card {
     width: calc((100% - 90px) / 6);
-    /* Taille ajustée pour un maximum de 6 cartes côte à côte */
+   
     max-width: 160px;
-    /* Taille maximale des cartes */
+
     height: auto;
-    /* La hauteur s'ajuste automatiquement */
+   
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    /* Distribution égale entre les éléments */
+    
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -638,28 +642,28 @@ main.game-main section.game-game-area {
     text-align: center;
 }
 
-/* Alignement du numéro */
+
 .collection-pkm-card p:first-of-type {
     font-size: 14px;
     font-weight: normal;
-    /* Texte en style normal */
+   
     color: #555;
     margin: 0 0 8px 0;
     display: inline-block;
-    /* Aligné sur une seule ligne */
+    
 }
 
-/* Style des images */
+
 .collection-pkm-card img {
     max-width: 100%;
-    /* L'image ne déborde jamais du conteneur */
+    
     height: auto;
     margin-bottom: 8px;
     flex-shrink: 0;
-    /* Évite que l'image se réduise trop */
+   
 }
 
-/* Nom en dessous de l'image */
+
 .collection-pkm-card p:last-of-type {
     font-family: "Pokemon", sans-serif;
     /* Remplacez par une typo Pokémon si disponible */
@@ -700,11 +704,10 @@ main.game-main section.game-game-area {
     font-weight: bold;
 }
 
-/* Adaptation pour les écrans étroits */
 @media (max-width: 768px) {
     .collection-pkm-card {
         width: calc((100% - 45px) / 3);
-        /* Ajustement à 3 cartes par ligne */
+    
         max-width: 100px;
     }
 
@@ -716,7 +719,7 @@ main.game-main section.game-game-area {
 @media (max-width: 480px) {
     .collection-pkm-card {
         width: calc((100% - 30px) / 2);
-        /* Ajustement à 2 cartes par ligne */
+      
         max-width: 120px;
     }
 }
@@ -724,11 +727,9 @@ main.game-main section.game-game-area {
 /***************************************************************************/
 /************************* User classes ***************************/
 /***************************************************************************/
-
-/* Rectangle "Connecté avec..." */
 .rectangle-status {
-    width: calc(700px);
-    /* Largeur augmentée */
+    width: 100%;
+    max-width: 700px;
     margin: 20px auto;
     padding: 10px;
     background-color: var(--secondary-color-contrast);
@@ -740,20 +741,18 @@ main.game-main section.game-game-area {
     font-weight: bold;
 }
 
-/* Container des deux rectangles */
 .container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 30px;
-    /* Espace entre les rectangles augmenté */
     padding: 20px;
+    flex-wrap: wrap;
 }
 
-/* Rectangles Connexion et Inscription */
 .rectangle {
-    width: 350px;
-    /* Largeur augmentée */
+    width: 100%;
+    max-width: 350px;
     background-color: var(--neutral-color);
     border: 2px solid var(--neutral-color-accentuated);
     border-radius: 10px;
@@ -786,7 +785,6 @@ main.game-main section.game-game-area {
     background-color: var(--primary-color-hovered);
 }
 
-/* Bouton "Se déconnecter" */
 .logout-btn {
     display: block;
     margin: 20px auto;
@@ -804,3 +802,57 @@ main.game-main section.game-game-area {
 .logout-btn:hover {
     background-color: var(--primary-color-hovered);
 }
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .rectangle-status {
+        font-size: 1rem;
+    }
+
+    .rectangle h2 {
+        font-size: 1.1rem;
+    }
+
+    .rectangle form {
+        gap: 8px;
+    }
+
+    .rectangle button {
+        padding: 8px;
+    }
+
+    .logout-btn {
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rectangle-status {
+        font-size: 0.9rem;
+    }
+
+    .rectangle {
+        width: 100%;
+    }
+
+    .rectangle h2 {
+        font-size: 1rem;
+    }
+
+    .rectangle form {
+        gap: 5px;
+    }
+
+    .rectangle button {
+        padding: 6px;
+    }
+
+    .logout-btn {
+        padding: 6px 12px;
+    }
+}
+
