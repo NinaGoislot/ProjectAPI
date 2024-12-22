@@ -1,5 +1,6 @@
 const MAX_FAVORITES = 5;
 const CURRENT_PLAYER_KEY = "currentPlayer";
+const ALL_PLAYERS_KEY = "players";
 
 // Rediriger vers l'accueil si aucun joueur de co
 let currentPlayer = JSON.parse(localStorage.getItem(CURRENT_PLAYER_KEY));
@@ -96,6 +97,12 @@ function toggleFavorite(pokemon, button) {
 
 function savePlayerData() {
     localStorage.setItem(CURRENT_PLAYER_KEY, JSON.stringify(currentPlayer));
+
+    const players = JSON.parse(localStorage.getItem(ALL_PLAYERS_KEY));
+    const updatedPlayers = players.map(player =>
+        player.id === currentPlayer.id ? currentPlayer : player
+    );
+    localStorage.setItem(ALL_PLAYERS_KEY, JSON.stringify(updatedPlayers));
 }
 
 // --------------------------------------------------------------------------------------------------------------

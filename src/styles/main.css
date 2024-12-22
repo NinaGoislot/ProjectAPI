@@ -70,7 +70,7 @@ main {
     height: 50vh;
 
     position: relative;
-    overflow: hidden; /* Empêche les sprites de sortir visuellement */
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,12 +79,8 @@ main {
 
 .favorites-pkm .favorites-pkm-list .favorites-pkm-card img {
     width: 200px;
-}
-
-.favorites-pkm-sprite {
-    width: 100px; 
     height: auto;
-    animation: jump 0.5s ease-in-out infinite; /* Animation de gauche à droite */
+    animation: jump 0.5s ease-in-out infinite;
 }
 
 
@@ -103,10 +99,10 @@ main {
         transform: translateX(0);
     }
     50% {
-        transform: translateX(50%); /* Se déplace vers la droite */
+        transform: translateX(50%);
     }
     100% {
-        transform: translateX(0); /* Retourne à gauche */
+        transform: translateX(0); 
     }
 }
 
