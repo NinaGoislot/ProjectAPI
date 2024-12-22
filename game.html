@@ -31,21 +31,26 @@
     </header>
 
     <main class="game-main">
-        <section class="game-settings">
-            <div id="game-switch" class="game-switch" role="radiogroup" aria-labelledby="game-switch-label">
-                <p id="game-switch-label">Type de jeu :</p>
-                <label for="game-mode-sound">Cris</label>
-                <input id="game-mode-sound" type="radio" name="game-type" value="1" checked />
+        <section class="game-infos">
+            <button id="generate-pkm" class="game-generate-pkm btn">Générer un nouveau pokémon</button>
+            <div class="game-settings">
+                <div id="game-switch" class="game-switch" role="radiogroup" aria-labelledby="game-current-type">
+                    <p id="game-current-type">Type de jeu actuel : Guess Sound</p>
+                    <div>
+                        <label for="game-mode-sound">Cris</label>
+                        <input id="game-mode-sound" type="radio" name="game-type" value="1" checked />
 
-                <label for="game-mode-shape">Silhouette</label>
-                <input id="game-mode-shape" type="radio" name="game-type" value="2" />
-
-                <p id="game-current-type">Type de jeu actuel : Guess Sound</p>
+                        <label for="game-mode-shape">Silhouette</label>
+                        <input id="game-mode-shape" type="radio" name="game-type" value="2" />
+                    </div>
+                </div>
+            </div>
+            <div class="game-help">
+                <button id="help-btn-square" onclick="getSquareHelp()" class="game-controls-help btn">Indice par carré</button>
+                <button id="help-btn-type" onclick="getTypeHelp()" class="game-controls-help btn">Indice par type</button>
             </div>
         </section>
         <section class="game-game-area">
-            <button id="generate-pkm" class="game-generate-pkm">Générer un nouveau pokémon</button>
-
             <div class="game-display">
                 <img id="game-sprite-pkm" class="game-display-item" src="./src/images/image-default.jpg"
                     alt="sprite du pokémon">
@@ -58,16 +63,12 @@
                 <div id="game-pkm-name-try" class="game-pkm-name-try">
                     <input placeholder="Nom du pokémon" type="text" id="pkm-name-user" name="pkm-name-user" required
                         minlength="3" maxlength="20" />
-                    <button id="check-pkm-name" class="game-generate-pkm">Check</button>
+                    <button id="check-pkm-name" class="game-generate-pkm btn">Check</button>
                 </div>
+                <div id="help-container" class="game-help-items"></div>
                 <p id="pkm-name-answer"></p>
                 <!-- <input type="text" id="pkm-name-answer" name="pkm-name-answer" minlength="3" maxlength="20" readonly /> -->
             </div>
-        </section>
-        <section class="game-controls">
-            <div id="help-container" class="game-help-items"></div>
-            <button id="help-btn-square" onclick="getSquareHelp()" class="game-controls-help">Help carré</button>
-            <button id="help-btn-type" onclick="getTypeHelp()" class="game-controls-help">Help type</button>
         </section>
     </main>
 </body>

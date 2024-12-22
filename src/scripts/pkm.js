@@ -282,7 +282,7 @@ async function getSquareHelp() {
             //create button
             const btn = document.createElement('button');
             btn.innerText = pokemonName;
-            btn.classList.add('game-help-square-btn');
+            btn.classList.add('game-help-square-btn', 'btn');
 
             // event listener
             btn.addEventListener('click', () => {
