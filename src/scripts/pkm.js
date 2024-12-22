@@ -3,8 +3,7 @@ console.log("Script bien chargé");
 // ---------- URL SETTINGS ---------
 const PROTOCOLE_API = `https`;
 const URL_API = `pokeapi.co/api/v2`;
-
-const BASE_AUDIO_URL = 'https://pokemoncries.com/cries';
+const BASE_AUDIO_URL = `${PROTOCOLE_API}://pokemoncries.com/cries`;
 
 // ---------- GLOBAL CONST ---------
 const CURRENT_PLAYER_KEY = "currentPlayer";
@@ -66,8 +65,6 @@ async function getRandomPokemonData() {
         pkmSprite = isShiny ? data.sprites.front_shiny : data.sprites.front_default;
 
         // -------- Load sprite --------
-        const shinyLabel = isShiny ? `<p>✨ WAOUW ! Shiny ${pkmAngName}! ✨</p>` : `<p>${pkmAngName}</p>`;
-
         const imgSprite = document.getElementById("game-sprite-pkm");
         imgSprite.src = `${pkmSprite}`;
 
@@ -132,7 +129,6 @@ function checkPkmName() {
             let pokemonExists = currentPlayer.pokemons.some(pokemon => pokemon.id === pkmID);
             if (pokemonExists && isShiny) {
                 pokemonExists = currentPlayer.pokemons.some(pokemon => pokemon.id === pkmID && pokemon.shiny === true); //si shiny, alors je l'ajoute même s'il existe déjà en version classique
-                catchLabel = pokemonExists ? `Bravo, vous avez reconnu ${pkmFrName}.`: catchLabel;
             }
 
             if (!pokemonExists) {
@@ -153,7 +149,11 @@ function checkPkmName() {
                     player.id === currentPlayer.id ? currentPlayer : player
                 );
                 localStorage.setItem(ALL_PLAYERS_KEY, JSON.stringify(updatedPlayers));
+            } else {
+                catchLabel = `Bravo, vous avez reconnu ${pkmFrName}.`;
             }
+        } else {
+            catchLabel = `Bravo, vous avez reconnu ${pkmFrName}.`;
         }
 
         endGame(catchLabel);

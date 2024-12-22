@@ -15,7 +15,7 @@ if (!currentPlayer) {
 // --------------------------------------------------------------------------------------------------------------
 
 function displayAllPokemons() {
-    const pokemonList = document.getElementById("selectPkm-pkm-list");
+    const pokemonList = document.getElementById("collection-pkm-list");
 
     // Trier les Pokémon par ID croissant
     currentPlayer.pokemons.sort((a, b) => a.id - b.id);
@@ -114,7 +114,7 @@ window.addEventListener("load", () => {
     if (currentPath.includes("favorites.html")) {
         displayFavPokemons();
         animateSprite();
-    } else if (currentPath.includes("selectPokemon.html")) {
+    } else if (currentPath.includes("collection.html")) {
         displayAllPokemons();
     } else {
         console.log("Page non reconnue");
