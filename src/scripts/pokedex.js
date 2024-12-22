@@ -49,7 +49,7 @@ function displayFavPokemons() {
         return;
     }
 
-    favoriteList.innerHTML = ""; 
+    favoriteList.innerHTML = "";
 
     favoritePokemons.forEach(pokemon => {
         const card = document.createElement("div");
@@ -66,13 +66,79 @@ function displayFavPokemons() {
 // ------------------------------------------------- ANIMATION --------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------
 
-function animateSprite() {
-    // const sprites = document.querySelectorAll(".favorites-pkm-sprite");
 
-    // sprites.forEach(sprite => {
-    //     moveSprite(sprite);
-    // });
+// function animateSprite() {
+//     const sprites = document.querySelectorAll(".favorites-pkm-sprite");
+
+//     sprites.forEach(sprite => {
+//         const randomAction = Math.floor(Math.random() * 101);
+
+//         sprite.classList.remove("jump-animation");
+//         sprite.classList.remove("jump-animation-infinite");
+//         sprite.classList.remove("transform-animation");
+//         sprite.style.transform = "";
+
+//         const currentX = parseFloat(sprite.dataset.x) || 0;
+//         const currentY = parseFloat(sprite.dataset.y) || 0;
+
+//         let newX = currentX;
+//         let newY = currentY;
+
+//         sprite.style.setProperty("--current-x", `${currentX}px`);
+//         sprite.style.setProperty("--current-y", `${currentY}px`);
+//         sprite.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+//         if (randomAction <= 15) {
+
+//             sprite.classList.add("transform-animation");
+//             newX = currentX - 50;
+//         } else if (randomAction <= 30) {
+            
+//             sprite.classList.add("transform-animation");
+//             newX = currentX + 50;
+//             // sprite.addEventListener("transitionend", function onFlipEnd() {
+//             //     sprite.classList.add("transform-animation");
+//             //     newX = currentX + 50;
+//             //     sprite.removeEventListener("transitionend", onFlipEnd);
+//             // });
+//         } else if (randomAction <= 40) {
+//             sprite.style.transform = "scaleX(-1)";
+//         } else if (randomAction <= 90) { //joueur jump une seule fois
+//             sprite.classList.add("jump-animation");
+//             sprite.style.transform = `translate(${currentX}px, ${currentY}px)`;
+//             sprite.addEventListener("animationend", function onJumpEnd() {
+//                 sprite.classList.remove("jump-animation");
+//                 sprite.removeEventListener("animationend", onJumpEnd);
+//             });
+//         }
+
+//         if (randomAction <= 30) {
+//             const maxX = window.innerWidth * 0.25; // Limite à 50vw centré
+//             const maxY = window.innerHeight * 0.25; // Limite à 50vh centré
+//             const minX = -maxX;
+//             const minY = -maxY;
+
+
+//             newX = Math.min(Math.max(newX, minX), maxX);
+//             newY = Math.min(Math.max(newY, minY), maxY);
+
+//             sprite.style.setProperty("--current-x", `${newX}px`);
+//             sprite.style.setProperty("--current-y", `${newY}px`);
+//             sprite.style.transform = `translate(${newX}px, ${newY}px)`;
+//             sprite.dataset.x = newX;
+//             sprite.dataset.y = newY;
+//         }
+//     });
+// }
+
+function animateSprite() { 
+    const sprites = document.querySelectorAll(".favorites-pkm-sprite");
+
+        sprites.forEach(sprite => {
+            sprite.classList.add("jump-animation-infinite");
+        });
 }
+
 
 // --------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------- OTHER FUNCTIONS -----------------------------------------------
@@ -113,7 +179,8 @@ window.addEventListener("load", () => {
 
     if (currentPath.includes("favorites.html")) {
         displayFavPokemons();
-        animateSprite();
+        // animateSprite();
+        setInterval(animateSprite, 5000);
     } else if (currentPath.includes("collection.html")) {
         displayAllPokemons();
     } else {

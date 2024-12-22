@@ -80,7 +80,19 @@ main {
 .favorites-pkm .favorites-pkm-list .favorites-pkm-card img {
     width: 200px;
     height: auto;
+}
+
+.favorites-pkm .favorites-pkm-list .favorites-pkm-card .favorites-pkm-sprite.jump-animation {
+    animation: jump 0.5s ease-in-out;
+}
+
+.favorites-pkm .favorites-pkm-list .favorites-pkm-card .favorites-pkm-sprite.jump-animation-infinite {
     animation: jump 0.5s ease-in-out infinite;
+}
+
+
+.favorites-pkm .favorites-pkm-list .favorites-pkm-card .favorites-pkm-sprite.transform-animation {
+    transition: transform 3s ease-in-out;
 }
 
 
@@ -94,7 +106,36 @@ main {
     }
 }
 
-@keyframes move-left-right {
+/* @keyframes jump {
+    0%, 100% {
+        transform: translate(var(--current-x), var(--current-y)); 
+    }
+    50% {
+        transform: translate(var(--current-x), calc(var(--current-y) - 30px)); 
+    }
+} */
+
+@keyframes move-left {
+    0% {
+        transform: translateX(0);
+    }
+    50%,100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes move-left-to-center {
+    0% {
+        transform: translateX(0);
+    }
+    50%,100% {
+        transform: translateX(50%);
+    }
+}
+
+
+
+/* @keyframes move-left-right {
     0% {
         transform: translateX(0);
     }
@@ -104,7 +145,7 @@ main {
     100% {
         transform: translateX(0); 
     }
-}
+} */
 
 /***************************************************************************/
 /*************************** Collection classes ****************************/
