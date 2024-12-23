@@ -10,32 +10,40 @@
 </head>
 
 <body>
-    <header class="header">
+    <header>
         <div class="header-left">
             <h1 class="poke-title">PokeGuess</h1>
         </div>
-        <div class="header-right">
-            <a href="./index.html">
-                <img src="./src/images/home.png" alt="Home" class="header-button">
-            </a>
-            <a href="./user.html">
-                <img src="./src/images/user.png" alt="User" class="header-button">
-            </a>
-            <a href="./favorites.html">
-                <img src="./src/images/love.png" alt="Favorites" class="header-button">
-            </a>
-            <a href="./collection.html">
-                <img src="./src/images/settings.png" alt="Settings" class="header-button">
-            </a>
-        </div>
+        <nav class="header-right">
+            <ul class="menu">
+                <li> <a href="./index.html" title="Page d'Accueil">
+                        <img src="./src/images/home.png" alt="icône Accueil" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./user.html" title="Page de connexion">
+                        <img src="./src/images/user.png" alt="Icône connexion" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./favorites.html" title="Page de favoris">
+                        <img src="./src/images/love.png" alt="Icône accès aux favoris" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./collection.html" title="Pokédex">
+                        <img src="./src/images/settings.png" alt="icônes accéder au pokédex" class="header-button">
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </header>
-
     <main class="game-main">
         <section class="game-infos">
             <button id="generate-pkm" class="game-generate-pkm btn">Générer un nouveau pokémon</button>
             <div class="game-settings">
                 <div id="game-switch" class="game-switch" role="radiogroup" aria-labelledby="game-current-type">
-                    <p id="game-current-type">Type de jeu actuel : Guess Sound</p>
+                    <p id="game-current-type">Type de jeu actuel : Devine le cri</p>
                     <div>
                         <label for="game-mode-sound">Cris</label>
                         <input id="game-mode-sound" type="radio" name="game-type" value="1" checked />
@@ -46,8 +54,10 @@
                 </div>
             </div>
             <div class="game-help">
-                <button id="help-btn-square" onclick="getSquareHelp()" class="game-controls-help btn">Indice par carré</button>
-                <button id="help-btn-type" onclick="getTypeHelp()" class="game-controls-help btn">Indice par type</button>
+                <button id="help-btn-square" onclick="getSquareHelp()" class="game-controls-help btn">Indice par
+                    carré</button>
+                <button id="help-btn-type" onclick="getTypeHelp()" class="game-controls-help btn">Indice par
+                    type</button>
             </div>
         </section>
         <section class="game-game-area">
@@ -71,9 +81,9 @@
             </div>
         </section>
     </main>
+    <footer>
+        <p>&copy; Pokemon FanGame </p>
+    </footer>
 </body>
-<footer class="footer">
-    <p>&copy; Pokemon FanGame </p>
-</footer>
 
 </html>

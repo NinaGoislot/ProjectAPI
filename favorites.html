@@ -10,41 +10,42 @@
 </head>
 
 <body>
-    
-
-    <header class="header">
+    <header>
         <div class="header-left">
             <h1 class="poke-title">PokeGuess</h1>
         </div>
-        <div class="header-right">
-            <a href="./index.html">
-                <img src="./src/images/home.png" alt="Home" class="header-button">
-            </a>
-            <a href="./user.html">
-                <img src="./src/images/user.png" alt="User" class="header-button">
-            </a>
-            <a href="./favorites.html">
-                <img src="./src/images/love.png" alt="Favorites" class="header-button">
-            </a>
-            <a href="./collection.html">
-                <img src="./src/images/settings.png" alt="Settings" class="header-button">
-            </a>
-        </div>
+        <nav class="header-right">
+            <ul class="menu">
+                <li> <a href="./index.html" title="Page d'Accueil">
+                        <img src="./src/images/home.png" alt="icône Accueil" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./user.html" title="Page de connexion">
+                        <img src="./src/images/user.png" alt="Icône connexion" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./favorites.html" title="Page de favoris">
+                        <img src="./src/images/love.png" alt="Icône accès aux favoris" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./collection.html" title="Pokédex">
+                        <img src="./src/images/settings.png" alt="icônes accéder au pokédex" class="header-button">
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </header>
-
-
-
     <main class="favorites-main">
         <section class="favorites-pkm" style="background-image: url('src/images/garden.png'); background-size: cover;">
             <div id="favorites-pkm-list" class="favorites-pkm-list">
-                <div class="favorites-pkm-card">
-                </div>
+                 <!-- Les pokémon sont affichés là -->
             </div>
         </section>
     </main>
-    
-    
-    <footer class="footer">
+    <footer>
         <p>&copy; Pokemon FanGame </p>
     </footer>
 </body>

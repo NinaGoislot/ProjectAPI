@@ -13,6 +13,8 @@ const NB_POKEMON = 721; //jusqu'à la 6gen
 const PROBA_SHINY_SHADOW = 0.5; //En %
 const PROBA_SHINY_SOUND = 20; //En %
 
+const DISPLAY_CONSOLE = false; // change this value to display infos in console
+
 const GameType = {
     GUESS_SOUND: 1,
     GUESS_SHADOW: 2,
@@ -108,7 +110,9 @@ async function getRandomPokemonData() {
         // ------------------------------------
 
         pkmTypes = data.types.map(typeEntry => typeEntry.type.name);
-        console.log("Types du Pokémon : " + pkmTypes.join(", "));
+        if(DISPLAY_CONSOLE) {
+            console.log("Types du Pokémon : " + pkmTypes.join(", "));
+        }
 
         // ------------------------------------
         // ----------- GAME DISPLAY -----------
@@ -134,7 +138,9 @@ async function getRandomPokemonData() {
                 break;
         };
 
-        console.log("Pokémon recu : " + pkmFrName);
+        if(DISPLAY_CONSOLE) {
+            console.log("Pokémon recu : " + pkmFrName);
+        }
     } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
     }
@@ -209,7 +215,10 @@ function toggleGameType(event) {
     const inputUserElement = document.getElementById("pkm-name-user");
     inputUserElement.value = '';
 
-    console.log("currentGameType : " + currentGameType);
+    if(DISPLAY_CONSOLE) {
+        console.log("currentGameType : " + currentGameType);
+    }
+
     currentGameType = parseInt(event.target.value);
     const gameTypeText = currentGameType === GameType.GUESS_SOUND ?
         "Devine le cri" :
@@ -395,11 +404,15 @@ function checkIfShiny() {
     switch (currentGameType) {
         case 1:
             valueToUse = helped ? newShinyValue : PROBA_SHINY_SOUND;
-            console.log("taux de drop de shiny : " + valueToUse);
+            if(DISPLAY_CONSOLE) {
+                console.log("taux de drop de shiny : " + valueToUse);
+            }
             return randomValue < valueToUse;
         case 2:
             valueToUse = helped ? newShinyValue : PROBA_SHINY_SHADOW;
-            console.log("taux de drop de shiny : " + valueToUse);
+            if(DISPLAY_CONSOLE) {
+                console.log("taux de drop de shiny : " + valueToUse);
+            }
             return randomValue < valueToUse;
         default:
             return false;
@@ -413,6 +426,11 @@ function endGame(catchLabel) {
     const inputUserElement = document.getElementById("pkm-name-user");
     const textAfterCatch = document.getElementById("pkm-name-answer");
     const helpContainer = document.getElementById('help-container');
+
+    const helpElements = document.querySelectorAll(".game-controls-help");
+        helpElements.forEach(helpElement => {
+            helpElement.classList.remove("active");
+        });
 
     spriteElement.classList.remove("shape");
     spriteElement.classList.add("active");

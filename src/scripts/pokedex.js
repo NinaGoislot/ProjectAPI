@@ -25,11 +25,14 @@ function displayAllPokemons() {
     currentPlayer.pokemons.forEach((pokemon) => {
         const card = document.createElement("div");
         card.classList.add("collection-pkm-card");
+        if(pokemon.shiny) {
+            card.classList.add("shiny");
+        }
         card.innerHTML = `
             <p>Pokémon numéro ${pokemon.id}</p>
             <img src="${pokemon.sprite}" alt="Sprite du pokémon ${pokemon.name}" />
             ${pokemon.shiny ? '<p class="shiny">✨ ' + pokemon.name +' ✨</p>' : "<p>"+pokemon.name+"</p>"}
-            <button class="collection-btn-favorite">${pokemon.favorite ? "Retirer des favoris" : "Ajouter en favoris"}</button>
+            <button class="collection-btn-favorite btn">${pokemon.favorite ? "Retirer des favoris" : "Ajouter en favoris"}</button>
         `;
 
         const button = card.querySelector(".collection-btn-favorite");

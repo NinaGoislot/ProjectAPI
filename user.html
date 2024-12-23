@@ -10,64 +10,67 @@
 </head>
 
 <body>
-    <header class="header">
+    <header>
         <div class="header-left">
             <h1 class="poke-title">PokeGuess</h1>
         </div>
-        <div class="header-right">
-            <a href="./index.html">
-                <img src="./src/images/home.png" alt="Home" class="header-button">
-            </a>
-            <a href="./user.html">
-                <img src="./src/images/user.png" alt="User" class="header-button">
-            </a>
-            <a href="./favorites.html">
-                <img src="./src/images/love.png" alt="Favorites" class="header-button">
-            </a>
-            <a href="./collection.html">
-                <img src="./src/images/settings.png" alt="Settings" class="header-button">
-            </a>
-        </div>
+        <nav class="header-right">
+            <ul class="menu">
+                <li> <a href="./index.html" title="Page d'Accueil">
+                        <img src="./src/images/home.png" alt="icône Accueil" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./user.html" title="Page de connexion">
+                        <img src="./src/images/user.png" alt="Icône connexion" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./favorites.html" title="Page de favoris">
+                        <img src="./src/images/love.png" alt="Icône accès aux favoris" class="header-button">
+                    </a>
+                </li>
+                <li>
+                    <a href="./collection.html" title="Pokédex">
+                        <img src="./src/images/settings.png" alt="icônes accéder au pokédex" class="header-button">
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </header>
-
-    <main>
-        <section class="rectangle-status" aria-labelledby="status-title">
+    <main class="user-main">
+        <section class="user-status" aria-labelledby="status-title">
             <!-- <h2 id="status-title">Déconnecté avec succès</h2> -->
             <p id="user-status-message" aria-live="polite"></p>
         </section>
 
-        <div class="container">
-            <section class="rectangle" id="rectangle-inscription" aria-labelledby="register-title">
-                <h2 id="register-title">Inscription</h2>
+        <div class="user-container">
+            <section class="user-register user-log" aria-labelledby="user-register-title">
+                <h2 id="user-register-title">Inscription</h2>
                 <form id="user-register-form">
                     <label for="user-register-name">Identifiant :</label>
                     <input type="text" id="user-register-name" name="user-register-name" placeholder="Votre identifiant" required
                         minlength="3" maxlength="20" aria-required="true" />
-                    <button type="submit">Ajouter</button>
+                    <button type="submit" class="btn">Ajouter</button>
                 </form>
             </section>
 
-            <section class="rectangle" id="rectangle-connexion" aria-labelledby="login-title">
-                <h2 id="login-title">Connexion</h2>
+            <section class="user-login user-log" aria-labelledby="user-login-title">
+                <h2 id="user-login-title">Connexion</h2>
                 <form id="user-login-form">
                     <label for="user-login-name">Identifiant :</label>
                     <input type="text" id="user-login-name" name="user-login-name" placeholder="Votre identifiant" required
                         minlength="3" maxlength="20" aria-required="true" />
-                    <button type="submit">Se connecter</button>
+                    <button type="submit" class="btn">Se connecter</button>
                 </form>
             </section>
         </div>
 
-        <button id="user-logout-btn" class="logout-btn" style="display: none;" aria-live="polite">Se déconnecter</button>
+        <button id="user-logout-btn" class="user-logout-btn btn" style="display: none;" aria-live="polite">Se déconnecter</button>
     </main>
-
-    <footer class="footer">
+    <footer>
         <p>&copy; Pokemon FanGame</p>
     </footer>
 </body>
-
-
-
-
 
 </html>
