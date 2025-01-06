@@ -181,8 +181,6 @@ function savePlayerData() {
 window.addEventListener("load", () => {
     const currentPath = window.location.pathname;
 
-    console.log(currentPath);
-
     if (currentPath.includes("favorites.html") || currentPath.includes("favorites")) {
         displayFavPokemons();
         // animateSprite();
