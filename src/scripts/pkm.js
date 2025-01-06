@@ -13,7 +13,7 @@ const NB_POKEMON = 721; //jusqu'à la 6gen
 const PROBA_SHINY_SHADOW = 0.5; //En %
 const PROBA_SHINY_SOUND = 20; //En %
 
-const DISPLAY_CONSOLE = false; // change this value to display infos in console
+const DISPLAY_CONSOLE = true; // change this value to display infos in console
 
 const GameType = {
     GUESS_SOUND: 1,

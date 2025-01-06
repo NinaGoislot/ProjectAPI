@@ -142,30 +142,6 @@ function displayFavPokemons() {
 //         });
 // }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const pokemon = document.querySelector("#favorites-pkm-list");
-  
-
-    pokemons.forEach(pokemon => {
-        container.appendChild(pokemon);
-    });
-});
-
-// Fonction pour créer des Pokémon dynamiquement
-function createPokemons(count) {
-    const pokemons = [];
-    for (let i = 0; i < count; i++) {
-        const pokemon = document.createElement("div");
-        pokemon.className = "favorites-pkm-card";
-        pokemon.style.backgroundImage = `url('./src/images/pokemon${i + 1}.png')`; // Changez le chemin en fonction des images
-        pokemons.push(pokemon);
-    }
-    return pokemons;
-}
-
-
-
-
 
 
 // --------------------------------------------------------------------------------------------------------------
