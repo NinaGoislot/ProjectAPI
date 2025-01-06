@@ -183,11 +183,11 @@ window.addEventListener("load", () => {
 
     console.log(currentPath);
 
-    if (currentPath.includes("favorites.html")) {
+    if (currentPath.includes("favorites.html") || currentPath.includes("favorites")) {
         displayFavPokemons();
         // animateSprite();
         setInterval(animateSprite, 5000);
-    } else if (currentPath.includes("collection.html")) {
+    } else if (currentPath.includes("collection.html")|| currentPath.includes("collection")) {
         displayAllPokemons();
     } else {
         console.log("Page non reconnue");
